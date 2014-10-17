@@ -104,7 +104,7 @@ Ext.define('Cntysoft.Component.Uploader.Window', {
                 backgroundColor : '#ffffff'
             },
             layout : 'fit',
-            animateTarget : 'WEBOS_START_BTN',
+            //animateTarget : 'WEBOS_START_BTN',
             closeAction : 'hide',
             modal : true
         });

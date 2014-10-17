@@ -71,12 +71,12 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
      * @cfg {String} buttonText
      */
     buttonText : '',
-    /**
-     * 上传目录设置,系统能上传的文件目录只有几个指定的地方
-     * 
-     * @property {String} uploadPath
-     */
-    uploadPath : '',
+    ///**
+    // * 上传目录设置,系统能上传的文件目录只有几个指定的地方
+    // *
+    // * @property {String} uploadPath
+    // */
+    //uploadPath : '',
     /**
      * 允许的文件类型，用','隔开
      * 
@@ -145,6 +145,24 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
      */
     LANG_TEXT : null,
     /**
+     * 上传文件的大小限制
+     *
+     *@property {int} maxSize
+     */
+    maxSize : null,
+    /**
+     * 上传的请求Meta信息
+     *
+     * @property {Object} requestMeta
+     */
+    requestMeta : null,
+    /**
+     * 上传请求的URL地址
+     *
+     * @property {String} requestUrl
+     */
+    requestUrl : null,
+    /**
      * 出错信息对象， 支持处理多个错误
      * 
      * @private
@@ -157,6 +175,8 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
         this.LANG_TEXT = this.GET_LANG_TEXT('CORE');
         this.applyConstraintConfig(config);
         this.setupUploadPath();
+        this.setupConst();
+        this.setupConst();
         this.setupConst();
         this.callParent([config]);
          if(this.enableFileRef){
@@ -245,14 +265,14 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
         return array();
     },
     /**
-     * 设置允许的上传路径
-     */
+    * 设置允许的上传路径
+    */
     setupUploadPath : function()
     {
         var STD_PATH = Cntysoft.Kernel.StdPath;
         this.self.addStatics({
             /**
-             * @static 
+             * @static
              * @property {String[]} ALLOWED_PATH 合法的上传路径的起点
              */
             ALLOWED_PATH : STD_PATH.getUploadAllowPath()
@@ -433,9 +453,9 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     getWebUploaderConfig : function()
     {
         var STD_PATH = Cntysoft.Kernel.StdPath;
-        var sysEnv = Christ.getSysEnv();
-        var phpSetting = sysEnv.get(Cntysoft.Const.ENV_PHP_SETTING);
-        var fileSingleSize = this.fileSingleSizeLimit = parseInt(phpSetting.uploadMaxFileSize) * 1024 * 1024;//单位默认为MB
+        //var sysEnv = Christ.getSysEnv();
+        //var phpSetting = sysEnv.get(Cntysoft.Const.ENV_PHP_SETTING);
+        var fileSingleSize = this.fileSingleSizeLimit = parseInt(this.maxSize) * 1024 * 1024;//单位默认为MB
         //var fileSingleSize = this.fileSingleSizeLimit = 2 * 1024 * 1024;//单位默认为MB
         //这里是否需要包裹？
         var el = this.el;
@@ -455,7 +475,8 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
             //    extensions : this.fileTypeExts
             //},
             fileSingleSizeLimit : fileSingleSize,
-            server : '/UserApi',
+            //server : '/ApiGate/Sys', //这里
+            server : this.requestUrl,
             formData : this.getApiMetaInfo(),
             compress : false//暂时压缩，这个特性把我害惨了，组件在这个地方有个小bug
         };
@@ -506,10 +527,11 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
             Cntysoft.raiseError(Ext.getClassName(this), 'getInvokeMeta', 'upload path ' + this.uploadPath + ' is not in allowed path');
         }
         return {
-            REQUEST_META : Ext.JSON.encode({
-                name : 'Core',
-                method : 'WebUploader/process'
-            }),
+            //REQUEST_META : Ext.JSON.encode({
+            //    name : 'Core',
+            //    method : 'WebUploader/process'
+            //}),
+            REQUEST_META : Ext.JSON.encode(this.requestMeta),
             //这几个参数可能有冲突
             REQUEST_DATA : Ext.JSON.encode({
                 uploadDir : this.uploadPath,
@@ -576,9 +598,9 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
         } else if(errorType == 'fileTypeError'){
             this.queueErrorMsg += Ext.String.format(errorMap.INVALID_FILETYPE, file.name, this.fileTypeExts) + '</br>';
         } else if(errorType == 'exceed_size'){
-            var sysEnv = Cntysoft.getSysEnv();
-            var phpSetting = sysEnv.get(Cntysoft.Const.ENV_PHP_SETTING);
-            this.queueErrorMsg += Ext.String.format(errorMap.FILE_EXCEEDS_SIZE_LIMIT, file.name, phpSetting.uploadMaxFileSize) + '</br>';
+            //var sysEnv = Cntysoft.getSysEnv();
+            //var phpSetting = sysEnv.get(Cntysoft.Const.ENV_PHP_SETTING);
+            this.queueErrorMsg += Ext.String.format(errorMap.FILE_EXCEEDS_SIZE_LIMIT, file.name) + '</br>';
         } else if(errorType == 'Q_EXCEED_NUM_LIMIT'){
             this.queueErrorMsg += Ext.String.format(errorMap.QUEUE_LIMIT_EXCEEDED, this.queueSizeLimit) + '</br>';
         } else{
