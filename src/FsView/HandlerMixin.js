@@ -58,11 +58,11 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
             entry.rawName = name;
             entry.name = Ext.String.ellipsis(name, 10);
             entry.path =  '/' + this.path;
-            if(Ext.Array.contains(IMG, entry.type)){
-                entry.icon =  '/' + this.path + '/' + name;
-            } else{
-                entry.icon = this.getIconByFileType(entry.type);
-            }
+            //if(Ext.Array.contains(IMG, entry.type)){
+            //    entry.icon =  '/' + this.path + '/' + name;
+            //} else{
+            //    entry.icon = this.getIconByFileType(entry.type);
+            //}
         }
     },
     /**
@@ -105,7 +105,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
             var editable = fileVeItem[1];
             if(editable){
                 var editorCls = fileVeItem[2];
-                var filename = this.path + '/' + record.get('rawName');
+                var filename = record.get('fullPath') + '/' + record.get('rawName');
                 var key = filename.replace(/[#'"&$_/\\`~]/g, '');
                 var editor;
                 if(this.editors.containsKey(key)){

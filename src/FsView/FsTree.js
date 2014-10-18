@@ -22,7 +22,6 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
      * @inheritdoc
      */
     LANG_NAMESPACE : 'Cntysoft.Component.FsView.Lang',
-   
     fsView : null,
     LANG_TEXT : null,
     constructor : function(config)
@@ -56,6 +55,12 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
                 this.getRootNode().expand();
             },
             itemclick : this.itemClickHandler,
+            beforeitemexpand : function (obj){
+                var proxy = this.getStore().getProxy();
+                proxy.setInvokeParams({
+                    path : obj.getId()
+                });
+            },
             scope : this
         });
         this.callParent();
@@ -75,12 +80,12 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
                 {name : 'id', type : 'string', persist : false},
                 {name : 'text', type : 'string', persist : false}
             ],
-            nodeParam : 'path',
+            nodeParam : 'id',
             proxy : {
                 type : 'apigateway',
                 callType : 'Sys',
                 invokeMetaInfo : {
-                    name : 'Filesystem',
+                    name : 'FilesystemHandler',
                     method : 'treeLs'
                 },
                 reader : {

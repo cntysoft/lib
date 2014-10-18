@@ -346,7 +346,11 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                         }, {
                             xtype : 'cmpsimpleuploader',
                             margin : '0 0 0 10',
-
+                            requestUrl : '/ApiGate/Sys',
+                            requestMeta : {
+                                name : 'WebUploaderHandler',
+                                method : 'process'
+                            },
                             fileTypeExts : ['gif', 'png', 'jpg', 'jpeg'],
                             maskTarget : this,
                             enableFileRef : true,
@@ -472,7 +476,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
             xtype : 'cmpgridfsview',
             title : this.LANG_TEXT.PANEL.IMAGE_POOL_TITLE,
             startPaths : [
-                Cntysoft.Kernel.StdPath.getUploadPath().substr(1)
+                Cntysoft.Kernel.StdPath.getDefaultUploadPath()
             ],
             allowFileTypes : Cntysoft.Const.IMAGE_TYPES,
             displayColumns : ['rawName', 'size', 'type'],
@@ -500,7 +504,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                 if(record.get('type') != 'dir'){
                     //处理图片选中
                     me.form.getForm().setValues({
-                        url : '/' + this.path + '/' + record.get('rawName')
+                        url : record.get('fullPath') + '/' + record.get('rawName')
                     });
                     me.imageUrlFieldBlurHandler(me.urlField);
                     this.imagePreview.hide();

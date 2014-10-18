@@ -229,7 +229,7 @@ Ext.define('Cntysoft.Component.FsView.GridView', {
         if(Ext.Array.contains(allowTypes, record.get('type'))){
             me.imagePreview.setTarget(html);
             this.currentSetTimeoutId = window.setTimeout(function(){
-                me.imagePreview.loadImage('/' + me.path + '/' + record.get('rawName'));
+                me.imagePreview.loadImage(record.get('fullPath') + '/' + record.get('rawName'));
             }, 600);
         }
     },

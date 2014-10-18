@@ -212,54 +212,6 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     constructor : function(config)
     {
         this.mixins.langTextProvider.constructor.call(this);
-//        this.addEvents(
-//        /**
-//         * @param {string} path
-//         */
-//        'pathchange',
-//        /**
-//         * @param {String} path
-//         */
-//        'beforecd',
-//        /**
-//         * @event
-//         * @param {Cntysoft.Component.FsView.AbstractView} view
-//         * @param {Ext.data.Model} record
-//         * @param {Ext.EventObject} event
-//         */
-//        'beforeitemclick',
-//        'itemdblclick',
-//        'itemclick',
-//        /**
-//         * @event
-//         * @param {Cntysoft.Component.FsView.AbstractView} view
-//         * @param {Ext.data.Model} record
-//         * @param {Ext.EventObject} event
-//         */
-//        'beforeitemcontextmenu',
-//        'itemcontextclick',
-//        /**
-//         * @event
-//         * @param {Cntysoft.Component.FsView.AbstractView} view
-//         * @param {Ext.data.Model} record
-//         * @param {Ext.EventObject} event
-//         */
-//        'beforeselect',
-//        /**
-//         * @event
-//         * @param {Cntysoft.Component.FsView.AbstractView} view
-//         * @param {Ext.data.Model} record
-//         * @param {Ext.EventObject} event
-//         */
-//        'select',
-//        /**
-//         * 当文件被点击之后派发,以后用于文件查看动作的关联
-//         * 
-//         * @param {Cntysoft.Component.FsView.AbstractView} fsView
-//         * @param {String} filename
-//         */
-//        'fileview'
-//        );
         this.ABSTRACT_LANG_TEXT = this.GET_LANG_TEXT('ABSTRACT_VIEW');
         this.editors = new Ext.util.HashMap();
         this.callParent([config]);
@@ -327,11 +279,12 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     {
         if(path != this.path){
             if(this.fireEvent('beforecd', path)){
-                this.getFsStore().load({
-                    params : {
-                        path : path
-                    }
+                var store = this.getFsStore();
+                var proxy = store.getProxy();
+                proxy.setInvokeParams({
+                    path : path
                 });
+                store.load();
             }
         }
     },
@@ -342,7 +295,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
         var store = this.getFsStore();
         var proxy = store.getProxy();
         proxy.setInvokeMetaInfo({
-            name : 'Filesystem',
+            name : 'FilesystemHandler',
             method : 'getStartDirPaths'
         });
         proxy.setInvokeParams({
@@ -350,7 +303,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
         });
         store.load();
         proxy.setInvokeMetaInfo({
-            name : 'Filesystem',
+            name : 'FilesystemHandler',
             method : 'ls'
         });
     },
@@ -665,9 +618,8 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
                     {name : 'isReadable', type : 'boolean', persist : false},
                     {name : 'isWritable', type : 'boolean', persist : false},
                     {name : 'isStartup', type : 'boolean', persist : false},
-                    {name : 'startupPath', type : 'string', persist : false},
                     {name : 'size', type : 'string', persist : false},
-                    {name : 'path', type : 'string', persist : false}
+                    {name : 'fullPath', type : 'string', persist : false}
                 ],
                 proxy : {
                     type : 'apigateway',
@@ -677,7 +629,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
                         rootProperty : 'entries'
                     },
                     invokeMetaInfo : {
-                        name : 'Filesystem',
+                        name : 'FilesystemHandler',
                         method : 'ls'
                     },
                     pArgs : [{
