@@ -453,10 +453,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     getWebUploaderConfig : function()
     {
         var STD_PATH = Cntysoft.Kernel.StdPath;
-        //var sysEnv = Christ.getSysEnv();
-        //var phpSetting = sysEnv.get(Cntysoft.Const.ENV_PHP_SETTING);
         var fileSingleSize = this.fileSingleSizeLimit = parseInt(this.maxSize) * 1024 * 1024;//单位默认为MB
-        //var fileSingleSize = this.fileSingleSizeLimit = 2 * 1024 * 1024;//单位默认为MB
         //这里是否需要包裹？
         var el = this.el;
         var targetId = '#' + el.id;
@@ -475,7 +472,6 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
             //    extensions : this.fileTypeExts
             //},
             fileSingleSizeLimit : fileSingleSize,
-            //server : '/ApiGate/Sys', //这里
             server : this.requestUrl,
             formData : this.getApiMetaInfo(),
             compress : false//暂时压缩，这个特性把我害惨了，组件在这个地方有个小bug
@@ -521,7 +517,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     {
         var STD_PATH = Cntysoft.Kernel.StdPath;
         if('' == Ext.String.trim(this.uploadPath)){
-            this.uploadPath = STD_PATH.getUploadPath();
+            this.uploadPath = STD_PATH.getDefaultUploadPath();
         }
         if(!this.checkUploadPath(this.uploadPath)){
             Cntysoft.raiseError(Ext.getClassName(this), 'getInvokeMeta', 'upload path ' + this.uploadPath + ' is not in allowed path');
