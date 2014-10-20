@@ -13,7 +13,6 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     alias : 'widget.cmpuploadercore',
     requires : [
         'Cntysoft.Kernel.StdPath',
-        'ChristManager.Kernel.StdPath',
         'Cntysoft.Component.Uploader.Lang.zh_CN'
     ],
     mixins : {
