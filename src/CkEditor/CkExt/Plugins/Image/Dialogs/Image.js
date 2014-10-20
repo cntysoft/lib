@@ -487,7 +487,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                     items : [{
                             xtype : 'label',
                             text : LABEL,
-                            style : 'color:#157FCC;'
+                            cls : 'cntysoft-comp-gridview-toobar-label'
                         }]
                 };
             },

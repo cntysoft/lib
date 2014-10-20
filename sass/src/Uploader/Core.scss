@@ -1,0 +1,38 @@
+/*
+Uploadify
+Copyright (c) 2012 Reactive Apps, Ronnie Garcia
+Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
+默认的Uploadify按钮样式
+*/
+
+.openengine-component-uploader {
+  font-family: tahoma,arial,verdana,sans-serif,微软雅黑,宋体;
+  font-size: 13px;
+  font-weight:bold;
+}
+.openengine-component-uploader .webuploader-pick{
+  border-color: #8c632e;
+  background-image: none;
+  background-color: #a88251;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
+  color: #FFFFFF;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  width: 100%;
+  height : 100%;
+  line-height:100%;
+}
+.openengine-component-uploader .webuploader-pick.webuploader-pick-hover {
+  background-color: #9a774a;
+  border-color: #8c632e;
+  border-width: 1px;
+  border-style: solid;
+  background-position: center bottom;
+  color: #FFFFFF;
+}

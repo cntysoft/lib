@@ -21,8 +21,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     requiredScripts : [
         '/JsLibrary/Jquery/jquery-1.10.1.min.js',
-        '/JsLibrary/WebUploader/webuploader.min.js',
-        '/JsLibrary/Resources/Css/Component/Uploader.css'
+        '/JsLibrary/WebUploader/webuploader.min.js'
     ],
     /**
      * @inheritdoc
