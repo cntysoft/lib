@@ -1,6 +1,6 @@
 /**
  * Cntysoft OpenEngine
- * 
+ *
  * @author SOFTBOY <cntysoft@163.com>
  * copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * license    http://www.cntysoft.com/license/new-bsd     New BSD License
@@ -13,6 +13,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     alias : 'widget.cmpuploadercore',
     requires : [
         'Cntysoft.Kernel.StdPath',
+        'ChristManager.Kernel.StdPath',
         'Cntysoft.Component.Uploader.Lang.zh_CN'
     ],
     mixins : {
@@ -29,19 +30,19 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     LANG_NAMESPACE : 'Cntysoft.Component.Uploader.Lang',
     /**
      * 是否自动开始上传文件
-     * 
+     *
      * @cfg {Boolean} [autoStart=false]
      */
     autoStart : false,
     /**
      * 是否执行分片上传
-     * 
+     *
      * @cfg {Boolean} [chunked=true]
      */
     chunked : false,
     /**
      * 默认的按钮类名称
-     * 
+     *
      * @cfg {String} [buttonCls='openengine-component-uploader']
      */
     cls : 'openengine-component-uploader',
@@ -60,13 +61,13 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     fileSingleSizeLimit : null,
     /**
      * 队列中总文件数量
-     * 
+     *
      * @cfg {Number} [queueSizeLimit=100]
      */
     queueSizeLimit : 20,
     /**
      * 上传按钮文字
-     * 
+     *
      * @cfg {String} buttonText
      */
     buttonText : '',
@@ -78,63 +79,63 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     //uploadPath : '',
     /**
      * 允许的文件类型，用','隔开
-     * 
+     *
      * @cfg {Array} fileTypeExts
      */
     fileTypeExts : ['gif', 'png', 'jpg', 'jpeg', 'txt', 'rar', 'zip', 'tar.gz', 'html'],
     /**
      * 文件类型判断的正则
-     * 
+     *
      * @private
      * @property {String} fileTypeRegex
      */
     fileTypeRegex : null,
     /**
      * 是否开启文件引用追踪, 启用之后系统会自动保存文件的链接相关信息
-     * 
+     *
      * @property {Boolean} enableFileRef
      */
     enableFileRef : false,
     /**
      * 是否开启图片生成缩略图功能，只对上传文件为图片的时候起作用，默认为关闭状态
-     * 
+     *
      * @author Changwang <chenyongwang1104@163.com>
-     * @property {Boolean} enableNail 
+     * @property {Boolean} enableNail
      */
     enableNail : false,
     /**
      * 是否允许多文件上传
-     * 
+     *
      * @cfg {Boolean} [multi=true]
      */
     multi : true,
     /**
      * 判断当文件存在的时候是否覆盖
-     * 
+     *
      * @property {Boolean} overwrite
      */
     overwrite : false,
     /**
      * 是否在文件名称后面加上随机码
-     * 
+     *
      * @property {Boolean} randomize
      */
     randomize : true,
     /**
      * 是否根据日期创建子文件夹
-     * 
+     *
      * @property {Boolean} createSubDir
      */
     createSubDir : false,
     /**
      * 指定当前上传文件的文件名称
-     * 
+     *
      * @property {String} targetName
      */
     targetName : '',
     /**
      * 百度上传组建引用
-     * 
+     *
      * @property {WebUploader} webUploader
      */
     webUploader : null,
@@ -163,22 +164,28 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     requestUrl : null,
     /**
      * 出错信息对象， 支持处理多个错误
-     * 
+     *
      * @private
      * @property {String} queueErrorMsg
      */
     queueErrorMsg : '',
+    /**
+     * {String} uploadPath
+     */
+    uploadPath : null,
     constructor : function(config)
     {
         config = config || {};
+        if('' == Ext.String.trim(config.uploadPath)){
+            Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'uploadPath is null');
+        }
         this.LANG_TEXT = this.GET_LANG_TEXT('CORE');
         this.applyConstraintConfig(config);
         this.setupUploadPath();
         this.setupConst();
-        this.setupConst();
-        this.setupConst();
+        this.setUploadPath(config.uploadPath);
         this.callParent([config]);
-         if(this.enableFileRef){
+        if(this.enableFileRef){
             this.createSubDir = true;
         }
     },
@@ -188,14 +195,14 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     applyConstraintConfig : function(config)
     {
         Ext.apply(config,{
-           buttonText : this.LANG_TEXT.BROWSE 
+            buttonText : this.LANG_TEXT.BROWSE
         });
     },
     initComponent : function()
     {
         this.fileTypeRegex = this.fileTypeExts.join(',')
-        .replace(/,/g, '|')
-        .replace(/\*/g, '.*');
+            .replace(/,/g, '|')
+            .replace(/\*/g, '.*');
         this.fileTypeRegex = new RegExp(this.fileTypeRegex, 'i');
         this.callParent();
     },
@@ -242,7 +249,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 按照file对象或者fileid 删除上传队列里面的文件
-     * 
+     *
      * @param {String|Object} file
      */
     removeFile : function(file)
@@ -253,7 +260,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 返回指定状态的文件集合，不传参数将返回所有状态的文件。
-     * 
+     *
      * @return {Array}
      */
     getFiles : function()
@@ -264,18 +271,18 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
         return array();
     },
     /**
-    * 设置允许的上传路径
-    */
+     * 设置允许的上传路径
+     */
     setupUploadPath : function()
     {
-        var STD_PATH = Cntysoft.Kernel.StdPath;
-        this.self.addStatics({
-            /**
-             * @static
-             * @property {String[]} ALLOWED_PATH 合法的上传路径的起点
-             */
-            ALLOWED_PATH : STD_PATH.getUploadAllowPath()
-        });
+        //var STD_PATH = Cntysoft.Kernel.StdPath;
+        //this.self.addStatics({
+        //    /**
+        //     * @static
+        //     * @property {String[]} ALLOWED_PATH 合法的上传路径的起点
+        //     */
+        //    ALLOWED_PATH : STD_PATH.getUploadAllowPath()
+        //});
     },
     setupConst : function()
     {
@@ -299,15 +306,15 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 设置上传核心上传路径
-     * 
+     *
      * @param {String} path
      * @return {Cntysoft.Component.Uploadify.Core}
      */
     setUploadPath : function(path)
     {
-        if(!this.checkUploadPath(path)){
-            Cntysoft.raiseError(Ext.getClassName(this), 'setUploadPath', 'upload path : ' + path + ' is not allowed');
-        }
+        //if(!this.checkUploadPath(path)){
+        //    Cntysoft.raiseError(Ext.getClassName(this), 'setUploadPath', 'upload path : ' + path + ' is not allowed');
+        //}
         this.uploadPath = path;
         if(this.webUploader){
             this.applyConfigToUploader();
@@ -316,7 +323,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 设置附件追踪
-     * 
+     *
      * @param {Boolean} flag
      * @return {Cntysoft.Component.Uploadify.Core}
      */
@@ -333,7 +340,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 设置上传图片是否生成缩略图
-     * 
+     *
      * @param {Boolean} flag
      * @return {Cntysoft.Component.Uploadify.Core}
      */
@@ -347,7 +354,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 设置上传的文件的文件名称
-     * 
+     *
      * @param {Boolean} flag
      * @return {Cntysoft.Component.Uploadify.Core}
      */
@@ -361,7 +368,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 文件存在是否重写
-     * 
+     *
      * @param {Boolean} flag
      * @return {Cntysoft.Component.Uploadify.Core}
      */
@@ -375,7 +382,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 是否在上传的文件名称后面添加随机码
-     * 
+     *
      * @param {Boolean} flag
      * @return {Cntysoft.Component.Uploadify.Core}
      */
@@ -389,7 +396,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 是否在上传成功保存文件的时候创建日期文件夹
-     * 
+     *
      * @param {Boolean} flag
      * @return {Cntysoft.Component.Uploadify.Core}
      */
@@ -403,7 +410,8 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 检查上传路径是否合法
-     * 
+     * @TODO 暂时禁用这个方法，因为每个项目的上传路径不一样
+     *
      * @param {String} path
      * @return {Boolean}
      */
@@ -446,7 +454,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 获取默认的Uploader配置对象
-     * 
+     *
      * @return {Object}
      */
     getWebUploaderConfig : function()
@@ -514,13 +522,9 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
      */
     getApiMetaInfo : function()
     {
-        var STD_PATH = Cntysoft.Kernel.StdPath;
-        if('' == Ext.String.trim(this.uploadPath)){
-            this.uploadPath = STD_PATH.getDefaultUploadPath();
-        }
-        if(!this.checkUploadPath(this.uploadPath)){
-            Cntysoft.raiseError(Ext.getClassName(this), 'getInvokeMeta', 'upload path ' + this.uploadPath + ' is not in allowed path');
-        }
+        //if(!this.checkUploadPath(this.uploadPath)){
+        //    Cntysoft.raiseError(Ext.getClassName(this), 'getApiMetaInfo', 'upload path ' + this.uploadPath + ' is not in allowed path');
+        //}
         return {
             //REQUEST_META : Ext.JSON.encode({
             //    name : 'Core',
@@ -581,7 +585,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     },
     /**
      * 文件加入队列之前错误探测
-     * 
+     *
      * @param {Object} file 文件对象
      * @param {String} errorType 错误类型
      */
@@ -605,7 +609,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     /**
      * 当单个文件超过文件限制的时候，webuploader没有触发事件，唉，为什么这样设计啊
      * 我们在这里进行相关处理
-     * 
+     *
      * @param {Object} file 文件对象
      */
     fileQueuedHandler : function(file)

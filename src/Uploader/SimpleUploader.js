@@ -28,6 +28,7 @@ Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
     useBuildInErrorHandler : true,
     applyConstraintConfig : function(config)
     {
+        this.callParent(config);
         Ext.apply(config, {
             multi : false,
             queueSizeLimit : 1,

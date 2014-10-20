@@ -87,12 +87,30 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
          */
         tooltip : null,
         /**
+         * @TODO 这里传入默认的上传路径,  这里是作为独立库的惟一的配置入口
+         *
+         * @property {String} defaultUploadPath
+         */
+        defaultUploadPath : null,
+        /**
+         * @TODO 这里是作为独立库的惟一的配置入口
+         *
+         * @property {Mixed} uploadMaxSize
+         */
+        uploadMaxSize : null,
+        /**
          * @param {Object} config
          */
         constructor : function(config)
         {
             //形成正确的覆盖关系
             var config = config || {};
+            if('' == Ext.String.trim(config.defaultUploadPath)) {
+                Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'defaultUploadPath is null');
+            }
+            if('' == Ext.String.trim(config.uploadMaxSize)) {
+                Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'uploadMaxSize is null');
+            }
             var ckConfig = config.ckConfig || {};
             if(config.height){
                 ckConfig.height = config.height;
