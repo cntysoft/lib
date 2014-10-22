@@ -33,7 +33,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign',{
    },
    initComponent : function()
    {
-       var basePath = this.main.basePath+'/Images';
+       var basePath = this.main.basePath;
        var types = Cntysoft.GET_COMP_LANG_TEXT('VENDER_EXT.CK.PLUGINS.IMAGE.COMP.IMAGE_ALIGN');
        
        var items = [];

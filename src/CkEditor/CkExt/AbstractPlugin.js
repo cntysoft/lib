@@ -79,7 +79,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.AbstractPlugin', {
     {
         Ext.apply(this, config);
         //TODO 修改路径
-        this.basePath = Cntysoft.Kernel.StdPath.getPlatformResPath() + '/Comp/CkEditor/Plugins/' + this.name;
+        this.basePath = Cntysoft.Kernel.StdPath.getPlatformResPath() + '/Images/Comp/CkEditor/Plugins/' + this.name;
         CKEDITOR.skin.addIcon(this.name, this.basePath + '/Icon.png');
         this.editor.ui.addButton(this.name.toUpperCase(), {
             label : this.label,
