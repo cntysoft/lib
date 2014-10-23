@@ -16,13 +16,8 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
         'Cntysoft.Component.Uploader.Lang.zh_CN'
     ],
     mixins : {
-        langTextProvider : 'Cntysoft.Mixin.LangTextProvider',
-        mashup : 'Ext.mixin.Mashup'
+        langTextProvider : 'Cntysoft.Mixin.LangTextProvider'
     },
-    requiredScripts : [
-        '/JsLibrary/Jquery/jquery-1.10.1.min.js',
-        '/JsLibrary/WebUploader/webuploader.min.js'
-    ],
     /**
      * @inheritdoc
      */
@@ -180,9 +175,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
         }
         this.LANG_TEXT = this.GET_LANG_TEXT('CORE');
         this.applyConstraintConfig(config);
-        this.setupUploadPath();
-        this.setupConst();
-        this.setUploadPath(config.uploadPath);
+        //this.setupUploadPath();
         this.callParent([config]);
         if(this.enableFileRef){
             this.createSubDir = true;
@@ -431,7 +424,17 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     afterRender : function()
     {
         this.callParent();
-        this.wrapperWebUploader();
+        Ext.Loader.loadScript({
+            url : [
+                '/JsLibrary/Jquery/jquery-1.10.1.min.js',
+                '/JsLibrary/WebUploader/webuploader.min.js'
+            ],
+            onLoad : function() {
+                this.setupConst();
+                this.wrapperWebUploader();
+            },
+            scope : this
+        });
     },
     /**
      * 加载百度上传器对象

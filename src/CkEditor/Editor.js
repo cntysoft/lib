@@ -15,12 +15,8 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
         extend : 'Ext.Component',
         alias : 'widget.cmpckditor',
         mixins : {
-            langTextProvider : 'Cntysoft.Mixin.LangTextProvider',
-            mashup : 'Ext.mixin.Mashup'
+            langTextProvider : 'Cntysoft.Mixin.LangTextProvider'
         },
-        requiredScripts : [
-            '/JsLibrary/CkEditor/ckeditor.js'
-        ],
         /**
          * TODO 这里要把所有的文件加载进来吗?
          */
@@ -123,7 +119,6 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
             this.constructToolbar(ckConfig);
             this.ckConfig = new Cntysoft.Component.CkEditor.Config(ckConfig);
             delete config.ckConfig;
-            this.setupCkEditor();
         },
         /**
          * 根据模式生成编辑器的工具栏
@@ -265,14 +260,21 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
         //private
         afterRender : function()
         {
-            if(this.enableLengthCheck){
-                this.tooltip = new Ext.tip.ToolTip({
-                    target : this.el.parent(),
-                    anchor : 'top'
-                });
-            }
-            this.ckeditor = CKEDITOR.replace(this.id, this.ckConfig);
-            this.warpCkEvents();
+            Ext.Loader.loadScript({
+                url : '/JsLibrary/CkEditor/ckeditor.js',
+                onLoad : function() {
+                    this.setupCkEditor();
+                    if(this.enableLengthCheck){
+                        this.tooltip = new Ext.tip.ToolTip({
+                            target : this.el.parent(),
+                            anchor : 'top'
+                        });
+                    }
+                    this.ckeditor = CKEDITOR.replace(this.id, this.ckConfig);
+                    this.warpCkEvents();
+                },
+                scope : this
+            });
             this.callParent();
         },
         //private
