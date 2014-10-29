@@ -15,12 +15,8 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
         extend : 'Ext.Component',
         alias : 'widget.cmpckditor',
         mixins : {
-            langTextProvider : 'Cntysoft.Mixin.LangTextProvider',
-            mashup : 'Ext.mixin.Mashup'
+            langTextProvider : 'Cntysoft.Mixin.LangTextProvider'
         },
-        requiredScripts : [
-            '/JsLibrary/CkEditor/ckeditor.js'
-        ],
         /**
          * TODO 这里要把所有的文件加载进来吗?
          */
@@ -87,12 +83,30 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
          */
         tooltip : null,
         /**
+         * @TODO 这里传入默认的上传路径,  这里是作为独立库的惟一的配置入口
+         *
+         * @property {String} defaultUploadPath
+         */
+        defaultUploadPath : null,
+        /**
+         * @TODO 这里是作为独立库的惟一的配置入口
+         *
+         * @property {Mixed} uploadMaxSize
+         */
+        uploadMaxSize : null,
+        /**
          * @param {Object} config
          */
         constructor : function(config)
         {
             //形成正确的覆盖关系
             var config = config || {};
+            if('' == Ext.String.trim(config.defaultUploadPath)) {
+                Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'defaultUploadPath is null');
+            }
+            if('' == Ext.String.trim(config.uploadMaxSize)) {
+                Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'uploadMaxSize is null');
+            }
             var ckConfig = config.ckConfig || {};
             if(config.height){
                 ckConfig.height = config.height;
@@ -105,7 +119,6 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
             this.constructToolbar(ckConfig);
             this.ckConfig = new Cntysoft.Component.CkEditor.Config(ckConfig);
             delete config.ckConfig;
-            this.setupCkEditor();
         },
         /**
          * 根据模式生成编辑器的工具栏
@@ -247,14 +260,21 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
         //private
         afterRender : function()
         {
-            if(this.enableLengthCheck){
-                this.tooltip = new Ext.tip.ToolTip({
-                    target : this.el.parent(),
-                    anchor : 'top'
-                });
-            }
-            this.ckeditor = CKEDITOR.replace(this.id, this.ckConfig);
-            this.warpCkEvents();
+            Ext.Loader.loadScript({
+                url : '/JsLibrary/CkEditor/ckeditor.js',
+                onLoad : function() {
+                    this.setupCkEditor();
+                    if(this.enableLengthCheck){
+                        this.tooltip = new Ext.tip.ToolTip({
+                            target : this.el.parent(),
+                            anchor : 'top'
+                        });
+                    }
+                    this.ckeditor = CKEDITOR.replace(this.id, this.ckConfig);
+                    this.warpCkEvents();
+                },
+                scope : this
+            });
             this.callParent();
         },
         //private

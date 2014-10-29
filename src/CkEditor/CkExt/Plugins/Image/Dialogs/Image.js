@@ -347,6 +347,8 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                             xtype : 'cmpsimpleuploader',
                             margin : '0 0 0 10',
                             requestUrl : '/ApiGate/Sys',
+                            uploadPath : this.EDITOR.defaultUploadPath,
+                            maxSize : this.EDITOR.uploadMaxSize,
                             requestMeta : {
                                 name : 'WebUploaderHandler',
                                 method : 'process'
@@ -476,7 +478,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
             xtype : 'cmpgridfsview',
             title : this.LANG_TEXT.PANEL.IMAGE_POOL_TITLE,
             startPaths : [
-                Cntysoft.Kernel.StdPath.getDefaultUploadPath()
+                this.EDITOR.defaultUploadPath
             ],
             allowFileTypes : Cntysoft.Const.IMAGE_TYPES,
             displayColumns : ['rawName', 'size', 'type'],
