@@ -15,7 +15,7 @@ Ext.define('Cntysoft.Component.Uploader.QueueView', {
         'Cntysoft.Kernel.StdPath',
         'Cntysoft.Component.Uploader.Core',
         'Cntysoft.Stdlib.Common',
-        'Cntysoft.SenchaExt.Tip.ErrorToolTip'
+        'SenchaExt.Tip.ErrorToolTip'
     ],
     mixins : {
         langTextProvider : 'Cntysoft.Mixin.LangTextProvider'

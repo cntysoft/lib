@@ -12,7 +12,7 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
     extend : 'Ext.tree.Panel',
     alias : 'widget.cntsmfstree',
     requires : [
-        'Cntysoft.SenchaExt.Data.TreeStore'
+        'SenchaExt.Data.TreeStore'
     ],
     mixins : {
         fcm : 'Cntysoft.Mixin.ForbidContextMenu',
@@ -71,7 +71,7 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
         if(!Ext.isDefined(config.startPaths) || 0 == config.startPaths.length){
             Cntysoft.raiseError(Ext.getClassName(this), 'createFsTreeStore', 'startPaths can not be null');
         }
-        return new Cntysoft.SenchaExt.Data.TreeStore({
+        return new SenchaExt.Data.TreeStore({
             root : {
                 text : STORE.ROOT,
                 id : config.startPaths.join('|')
