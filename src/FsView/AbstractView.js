@@ -15,7 +15,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     extend : 'Ext.container.Container',
     requires : [
         'Cntysoft.Kernel.StdPath',
-        'Cntysoft.SenchaExt.Data.Proxy.ApiProxy',
+        'SenchaExt.Data.Proxy.ApiProxy',
         'Cntysoft.Utils.Common',
         'Cntysoft.Component.FsView.FsTree',
         'Cntysoft.Framework.Core.Filesystem',
