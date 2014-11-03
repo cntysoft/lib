@@ -68,14 +68,14 @@ Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
             Cntysoft.showErrorWindow(Ext.String.format(Cntysoft.GET_LANG_TEXT('ERROR.UPLOAD_ERR'), errorInfo.msg));
         }
     },
-    uploadFileSuccessHandler : function(file, data)
+    uploadFileSuccessHandler : function(file, data, uploader)
     {
         if(this.maskTarget){
             this.maskTarget.loadMask.hide();
         }
         //要提示吗？
         if(this.hasListeners.fileuploadsuccess){
-            this.fireEvent('fileuploadsuccess', data);
+            this.fireEvent('fileuploadsuccess', data, uploader);
         }
     },
     uploadProgressHandler : function(file, percent)
