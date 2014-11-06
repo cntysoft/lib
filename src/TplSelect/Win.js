@@ -76,7 +76,7 @@ Ext.define('Cntysoft.Component.TplSelect.Win', {
                beforeitemcontextmenu : function(){
                   return false;
                },
-              // beforeselect : this.beforeSelectHandler,
+               beforeselect : this.beforeSelectHandler,
                scope : this
             },
             /**
@@ -98,7 +98,8 @@ Ext.define('Cntysoft.Component.TplSelect.Win', {
                   }
                   this.cd(path);
                } else{
-                  if(me.hasListeners.tplfileselected){
+                  var type = record.get('type');
+                  if(('html' == type || 'phtml' == type) && me.hasListeners.tplfileselected){
                      me.fireEvent('tplfileselected', record.get('path') + '/' + record.get('rawName'));
                   }
                   me.close();
@@ -107,11 +108,37 @@ Ext.define('Cntysoft.Component.TplSelect.Win', {
          },
          buttons : this.getBtnConfig()
       });
-      //this.addListener({
-      //   close : this.closeHandler,
-      //   scope : this
-      //});
+      this.addListener({
+         close : this.closeHandler,
+         scope : this
+      });
       this.callParent();
+   },
+   /**
+    * 主要防止选择中的不是模板文件，模板文件后缀一般由系统决定
+    */
+   beforeSelectHandler : function(fsView, record, event)
+   {
+      var type = record.get('type');
+      if('html' != type && 'phtml' != type){
+         return false;
+      }
+      return true;
+   },
+   closeHandler : function()
+   {
+      this.fsViewRef.cd2InitDir();
+   },
+
+   selectTplHandler : function()
+   {
+      var records = this.fsViewRef.getSelectedItems();
+      var record;
+      record = records.shift();
+      if(this.hasListeners.tplfileselected){
+         this.fireEvent('tplfileselected', record.get('path') + '/' + record.get('rawName'))
+      }
+      this.close();
    },
 
    getBtnConfig : function()
@@ -119,10 +146,10 @@ Ext.define('Cntysoft.Component.TplSelect.Win', {
       var BTN_TEXT = Cntysoft.GET_LANG_TEXT('UI.BTN');
       return [{
          text : BTN_TEXT.OK,
-         //listeners : {
-         //   click : this.selectTplHandler,
-         //   scope : this
-         //}
+         listeners : {
+            click : this.selectTplHandler,
+            scope : this
+         }
       }, {
          text : BTN_TEXT.CANCEL,
          listeners : {
