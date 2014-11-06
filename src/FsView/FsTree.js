@@ -85,7 +85,7 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
                 type : 'apigateway',
                 callType : 'Sys',
                 invokeMetaInfo : {
-                    name : 'FilesystemHandler',
+                    name : 'Filesystem',
                     method : 'treeLs'
                 },
                 reader : {

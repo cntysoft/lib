@@ -219,7 +219,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     initComponent : function()
     {
         //检查startpaths不能为空
-        if(0 == this.startPaths.length){
+        if(!this.startPaths || 0 == this.startPaths.length){
             Cntysoft.raiseError(Ext.getClassName(this), 'initComponent', 'startPaths can not be empty');
         }
         this.callParent();
@@ -295,7 +295,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
         var store = this.getFsStore();
         var proxy = store.getProxy();
         proxy.setInvokeMetaInfo({
-            name : 'FilesystemHandler',
+            name : 'Filesystem',
             method : 'getStartDirPaths'
         });
         proxy.setInvokeParams({
@@ -303,7 +303,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
         });
         store.load();
         proxy.setInvokeMetaInfo({
-            name : 'FilesystemHandler',
+            name : 'Filesystem',
             method : 'ls'
         });
     },
@@ -629,7 +629,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
                         rootProperty : 'entries'
                     },
                     invokeMetaInfo : {
-                        name : 'FilesystemHandler',
+                        name : 'Filesystem',
                         method : 'ls'
                     },
                     pArgs : [{
@@ -801,7 +801,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     {
         return {
             xtype : 'cntsmfstree',
-            width : 200,
+            width : 250,
             border : true,
             margin : this.isShowPath ? '4 1 0 0' : '0 1 0 0',
             region : 'west',

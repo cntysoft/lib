@@ -57,7 +57,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
             name = entry.name;
             entry.rawName = name;
             entry.name = Ext.String.ellipsis(name, 10);
-            entry.path =  '/' + this.path;
+            entry.path =  this.path;
             //if(Ext.Array.contains(IMG, entry.type)){
             //    entry.icon =  '/' + this.path + '/' + name;
             //} else{
