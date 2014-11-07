@@ -5,15 +5,15 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 默认的Uploadify按钮样式
 */
 
-.openengine-component-uploader {
+.cntysoft-comp-component-uploader {
   font-family: tahoma,arial,verdana,sans-serif,微软雅黑,宋体;
   font-size: 13px;
   font-weight:bold;
 }
-.openengine-component-uploader .webuploader-pick{
-  border-color: #8c632e;
+.cntysoft-comp-component-uploader .webuploader-pick{
+  border-color: $button-default-border-color;
   background-image: none;
-  background-color: #a88251;
+  background-color: $button-default-background-color;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -28,9 +28,9 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
   height : 100%;
   line-height:100%;
 }
-.openengine-component-uploader .webuploader-pick.webuploader-pick-hover {
-  background-color: #9a774a;
-  border-color: #8c632e;
+.cntysoft-comp-component-uploader .webuploader-pick.webuploader-pick-hover {
+  background-color: $button-default-background-color-over;
+  border-color: $button-default-border-color-over;
   border-width: 1px;
   border-style: solid;
   background-position: center bottom;

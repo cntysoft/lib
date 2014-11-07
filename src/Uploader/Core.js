@@ -37,9 +37,9 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     /**
      * 默认的按钮类名称
      *
-     * @cfg {String} [buttonCls='openengine-component-uploader']
+     * @cfg {String} [buttonCls='cntysoft-comp-component-uploader']
      */
-    cls : 'openengine-component-uploader',
+    cls : 'cntysoft-comp-component-uploader',
     /**
      * @cfg {Number} [height=24]
      */
