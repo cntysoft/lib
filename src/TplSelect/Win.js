@@ -13,6 +13,7 @@ Ext.define('Cntysoft.Component.TplSelect.Win', {
    requires: [
       'Cntysoft.Component.FsView.GridView',
       'Cntysoft.Component.TplSelect.Lang.zh_CN'
+
    ],
    mixins : {
       langTextProvider : 'Cntysoft.Mixin.LangTextProvider'
