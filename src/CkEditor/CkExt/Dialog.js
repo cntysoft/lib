@@ -11,9 +11,9 @@
 Ext.define('Cntysoft.Component.CkEditor.CkExt.Dialog', {
     extend : 'Ext.window.Window',
     /**
-     * @property {CKEDITOR.editor} editor
+     * @property {CKEDITOR.editor} editorRef
      */
-    editor : null,
+    editorRef : null,
     /**
      * 系统封装之后的CK编辑器
      * 
@@ -21,17 +21,17 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Dialog', {
      */
     EDITOR : null,
     /**
-     * @property {Cntysoft.VenderExt.CkEditor.AbstractPlugin} main
+     * @property {Cntysoft.VenderExt.CkEditor.AbstractPlugin} mainRef
      */
-    main : null,
+    mainRef : null,
     constructor : function(config)
     {
         config = config || {};
         this.applyConstraintConfig(config);
-        if(!Ext.isDefined(config.editor)){
-            Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'must have editor instance');
-        } else if(!Ext.isDefined(config.main)){
-            Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'must have main instance');
+        if(!Ext.isDefined(config.editorRef)){
+            Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'must have editorRef instance');
+        } else if(!Ext.isDefined(config.mainRef)){
+            Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'must have mainRef instance');
         }
         this.callParent([config]);
     },
@@ -54,7 +54,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Dialog', {
             beforeshow : this.beforeShowHandler,
             close : function()
             {
-                this.editor.updateElement();
+                this.editorRef.updateElement();
                 this.resetDialog();
             },
             scope : this
@@ -98,8 +98,8 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Dialog', {
     },
     destroy : function()
     {
-        delete this.editor;
-        delete this.main;
+        delete this.editorRef;
+        delete this.mainRef;
         delete this.EDITOR;
         this.callParent();
     }

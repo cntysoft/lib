@@ -17,7 +17,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign',{
     * @inheritdoc
     */
    LANG_NAMESPACE : 'Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Lang',
-   main : null,
+   mainRef : null,
    statics : {
       FLOAT_MAP : {
          NoneFocus : 'none',
@@ -46,7 +46,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign',{
    },
    initComponent : function()
    {
-      var basePath = this.main.basePath;
+      var basePath = this.mainRef.basePath;
       var types = this.LANG_TEXT;
 
       var items = [];
@@ -135,7 +135,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign',{
    },
    destroy : function()
    {
-      delete this.main;
+      delete this.mainRef;
       this.callParent();
    }
 });

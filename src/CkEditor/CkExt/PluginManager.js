@@ -21,9 +21,9 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.PluginManager',{
     /**
      * ckeditor原生的编辑器实例
      * 
-     * @property {CKEDITOR.editor} editor
+     * @property {CKEDITOR.editor} editorRef
      */
-    editor : null,
+    editorRef : null,
     /**
      * 插件对象映射
      * 
@@ -67,7 +67,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.PluginManager',{
         var len = keys.length;
         for(var i = 0; i < len; i++){
             this.plugins.add(keys[i],Ext.create(plugins[i], {
-                editor : this.editor,
+                editorRef : this.editorRef,
                 EDITOR : this.EDITOR
             }));
         }
@@ -94,7 +94,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.PluginManager',{
             plugin.destroy();
         });
         this.plugins.clear();
-        delete this.editor;
+        delete this.editorRef;
         delete this.EDITOR;
         delete this.plugins;
     }

@@ -29,7 +29,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Main', {
       this.callParent([config]);
       var allowed = 'img[alt,src]{border,border-style,border-width,float,height,padding,margin,margin-bottom,margin-left,margin-right,margin-top,width}',
          required = 'img[alt,src]';
-      var command = this.editor.addCommand(this.name, this.getCommandObject({
+      var command = this.editorRef.addCommand(this.name, this.getCommandObject({
          allowedContent : allowed,
          requiredContent : required,
          contentTransformations : [
@@ -42,7 +42,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Main', {
    setupEditorInstance : function()
    {
       var me = this;
-      this.editor.on('doubleclick', function(evt){
+      this.editorRef.on('doubleclick', function(evt){
          var element = evt.data.element;
          if(element.is('img') && !element.data('cke-realelement') && !element.isReadOnly()){
             var dialog = me.getDialog();

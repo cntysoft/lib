@@ -32,37 +32,37 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
     */
    currentImageUrl : '',
    /**
-    * @property {Ext.Component} imagePreview
+    * @property {Ext.Component} imagePreviewRef
     */
-   imagePreview : null,
+   imagePreviewRef : null,
    /**
-    * @property {Ext.form.Panel} form
+    * @property {Ext.form.Panel} formRef
     */
-   form : null,
+   formRef : null,
    /**
-    * @property {Ext.form.field.Checkbox} lockField
+    * @property {Ext.form.field.Checkbox} lockFieldRef
     */
-   lockField : null,
+   lockFieldRef : null,
    /**
-    * @property {Ext.form.field.Number} widthField
+    * @property {Ext.form.field.Number} widthFieldRef
     */
-   widthField : null,
+   widthFieldRef : null,
    /**
-    * @property {Ext.form.field.Number} heightField
+    * @property {Ext.form.field.Number} heightFieldRef
     */
-   heightField : null,
+   heightFieldRef : null,
    /**
-    * @property {Cntysoft.COmponent.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign} imageAlign
+    * @property {Cntysoft.COmponent.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign} imageAlignRef
     */
-   imageAlign : null,
+   imageAlignRef : null,
    /**
     * @property {DomElement} imageElement
     */
    imageElement : null,
    /**
-    * @property {Ext.tab.Panel} tabPanel
+    * @property {Ext.tab.Panel} tabPanelRef
     */
-   tabPanel : null,
+   tabPanelRef : null,
    /**
     * 图片库对象
     *
@@ -82,9 +82,9 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
     */
    imgUrlChange : false,
    /**
-    * @property {Cntysoft.Component.Uploader} uploader
+    * @property {Cntysoft.Component.Uploader} uploaderRef
     */
-   uploader : null,
+   uploaderRef : null,
    constructor : function(config)
    {
       this.LANG_TEXT = this.GET_LANG_TEXT('DIALOGS');
@@ -115,7 +115,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
             listeners : {
                afterrender : function(panel)
                {
-                  this.tabPanel = panel;
+                  this.tabPanelRef = panel;
                },
                scope : this
             }
@@ -155,7 +155,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          var values = this.parseElement();
          //获取比率
          this.previewRatio = values.width / values.height;
-         var img = this.imagePreview.el.first();
+         var img = this.imagePreviewRef.el.first();
          if(img){
             img.remove();
          }
@@ -165,9 +165,9 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
             width : values.width,
             height : values.height
          }));
-         var form = this.form.getForm();
-         this.imagePreview.el.appendChild(img);
-         var fields = this.form.query('numberfield');
+         var form = this.formRef.getForm();
+         this.imagePreviewRef.el.appendChild(img);
+         var fields = this.formRef.query('numberfield');
          for(var i = 0; i < fields.length; i++) {
             fields[i].suspendEvents();
          }
@@ -175,16 +175,16 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          for(var i = 0; i < fields.length; i++) {
             fields[i].resumeEvents();
          }
-         this.imageAlign.setValue(values.floatStyle);
+         this.imageAlignRef.setValue(values.floatStyle);
       } else{
          this.mode = this.self.M_NEW;
       }
    },
    okClickHandler : function()
    {
-      var values = this.form.getValues();
+      var values = this.formRef.getValues();
       var url = Ext.String.trim(values.url);
-      values.floatStyle = this.imageAlign.getValue();
+      values.floatStyle = this.imageAlignRef.getValue();
       var style = {
          'padding' : '1px',
          'border-width' : values.border + 'px',
@@ -210,7 +210,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   title : values.description
                }));
                img.setStyles(style);
-               this.editor.insertElement(img);
+               this.editorRef.insertElement(img);
             }
          } else if(this.mode == this.self.M_NEW){
             var img = new CKEDITOR.dom.element(Ext.DomHelper.createDom({
@@ -219,20 +219,20 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                title : values.description
             }));
             img.setStyles(style);
-            this.editor.insertElement(img);
+            this.editorRef.insertElement(img);
          }
       }
       this.close();
-      this.editor.focus();
+      this.editorRef.focus();
    },
    /**
     * 重置对话框
     */
    resetDialog : function()
    {
-      this.form.getForm().reset();
-      this.imageAlign.reset();
-      this.tabPanel.setActiveTab(0);
+      this.formRef.getForm().reset();
+      this.imageAlignRef.reset();
+      this.tabPanelRef.setActiveTab(0);
       if(this.imagePool){
          this.imagePool.cd2InitDir();
       }
@@ -242,13 +242,13 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    },
    imgWidthChangeHandler : function(field, width)
    {
-      var target = this.imagePreview.el.first();
+      var target = this.imagePreviewRef.el.first();
       if(target){
-         if(this.lockField.getValue()){
+         if(this.lockFieldRef.getValue()){
             var height = parseInt(width / this.previewRatio);
-            this.heightField.suspendEvents();
-            this.heightField.setValue(height);
-            this.heightField.resumeEvents();
+            this.heightFieldRef.suspendEvents();
+            this.heightFieldRef.setValue(height);
+            this.heightFieldRef.resumeEvents();
             target.setSize(width, height);
          } else{
             target.setWidth(width);
@@ -257,13 +257,13 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    },
    imgHeightChangeHandler : function(field, height)
    {
-      var target = this.imagePreview.el.first();
+      var target = this.imagePreviewRef.el.first();
       if(target){
-         if(this.lockField.getValue()){
+         if(this.lockFieldRef.getValue()){
             var width = parseInt(height * this.previewRatio);
-            this.widthField.suspendEvents();
-            this.widthField.setValue(width);
-            this.widthField.resumeEvents();
+            this.widthFieldRef.suspendEvents();
+            this.widthFieldRef.setValue(width);
+            this.widthFieldRef.resumeEvents();
             target.setSize(width, height);
          } else{
             target.setHeight(height);
@@ -277,7 +277,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          if(this.mode == this.self.M_MODIFY){
             this.imgUrlChange = true;
          }
-         var img = this.imagePreview.el.first();
+         var img = this.imagePreviewRef.el.first();
          if(img){
             img.remove();
          }
@@ -286,14 +286,14 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
             src : url
          }));
          img.on('load', this.previewImgLoadedHandler, this);
-         this.imagePreview.el.appendChild(img);
+         this.imagePreviewRef.el.appendChild(img);
       }
       this.currentImageUrl = url;
    },
    previewImgLoadedHandler : function(event, img)
    {
       this.previewRatio = img.width / img.height;
-      this.form.getForm().setValues({
+      this.formRef.getForm().setValues({
          height : img.height,
          width : img.width
       });
@@ -304,7 +304,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    uploadSuccessHandler : function(data)
    {
       data = data.shift();
-      this.form.getForm().setValues({
+      this.formRef.getForm().setValues({
          url : data.filename
       });
       if(this.EDITOR.hasListeners.filerefrequest){
@@ -332,7 +332,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                listeners : {
                   blur : this.imageUrlFieldBlurHandler,
                   afterrender : function(field){
-                     this.urlField = field;
+                     this.urlFieldRef = field;
                   },
                   scope : this
                },
@@ -343,7 +343,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                listeners : {
                   click : function()
                   {
-                     this.tabPanel.setActiveTab(1);
+                     this.tabPanelRef.setActiveTab(1);
                   },
                   scope : this
                },
@@ -386,7 +386,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   name : 'lock',
                   listeners : {
                      afterrender : function(comp){
-                        this.lockField = comp;
+                        this.lockFieldRef = comp;
                      },
                      scope : this
                   }
@@ -399,7 +399,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   listeners : {
                      change : this.imgWidthChangeHandler,
                      afterrender : function(field){
-                        this.widthField = field;
+                        this.widthFieldRef = field;
                      },
                      scope : this
                   }
@@ -412,7 +412,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   listeners : {
                      change : this.imgHeightChangeHandler,
                      afterrender : function(field){
-                        this.heightField = field;
+                        this.heightFieldRef = field;
                      },
                      scope : this
                   }
@@ -437,11 +437,11 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   height : 40,
                   labelWidth : 80,
                   fieldLabel : F_TEXT.ALIGN_TYPE,
-                  main : this.main,
+                  mainRef : this.mainRef,
                   name : 'align',
                   listeners : {
                      afterrender : function(comp){
-                        this.imageAlign = comp;
+                        this.imageAlignRef = comp;
                      },
                      scope : this
                   }
@@ -455,7 +455,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                autoScroll : true,
                listeners : {
                   afterrender : function(comp){
-                     this.imagePreview = comp;
+                     this.imagePreviewRef = comp;
                   },
                   scope : this
                }
@@ -470,7 +470,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          }, this.getCancelBtnConfig()],
          listeners : {
             afterrender : function(form){
-               this.form = form;
+               this.formRef = form;
             },
             scope : this
          }
@@ -502,7 +502,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          listeners : {
             afterrender : function(fsView)
             {
-               var imagePreview = fsView.imagePreview;
+               var imagePreviewRef = fsView.imagePreview;
                this.imagePool = fsView;
             },
             scope : this
@@ -511,12 +511,12 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          {
             if(record.get('type') != 'dir'){
                //处理图片选中
-               me.form.getForm().setValues({
+               me.formRef.getForm().setValues({
                   url : record.get('fullPath') + '/' + record.get('rawName')
                });
-               me.imageUrlFieldBlurHandler(me.urlField);
-               this.imagePreview.hide();
-               me.tabPanel.setActiveTab(0);
+               me.imageUrlFieldBlurHandler(me.urlFieldRef);
+               this.imagePreviewRef.hide();
+               me.tabPanelRef.setActiveTab(0);
             } else{
                this.callParent(arguments);
             }
@@ -526,19 +526,19 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    destroy : function()
    {
       delete this.LANG_TEXT;
-      delete this.imagePreview;
-      delete this.imageAlign;
-      delete this.lockField;
-      delete this.urlField;
-      delete this.form;
-      delete this.widthField;
-      delete this.heightField;
+      delete this.imagePreviewRef;
+      delete this.imageAlignRef;
+      delete this.lockFieldRef;
+      delete this.urlFieldRef;
+      delete this.formRef;
+      delete this.widthFieldRef;
+      delete this.heightFieldRef;
       delete this.imagePool;
-      delete this.tabPanel;
-      if(this.uploader){
-         this.uploader.destroy();
+      delete this.tabPanelRef;
+      if(this.uploaderRef){
+         this.uploaderRef.destroy();
       }
-      delete this.uploader;
+      delete this.uploaderRef;
       this.callParent();
    }
 });
