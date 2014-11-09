@@ -1,9 +1,9 @@
-/**
- * Cntysoft OpenEngine
- * 
+/*
+ * Cntysoft Cloud Software Team
+ *
  * @author SOFTBOY <cntysoft@163.com>
- * copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
- * license    http://www.cntysoft.com/license/new-bsd     New BSD License
+ * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
+ * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
 /**
  * 封装CKEDITOR富文本编辑器 配置对象, 根据我们的平台做了调整

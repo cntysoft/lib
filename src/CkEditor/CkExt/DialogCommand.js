@@ -1,9 +1,9 @@
 /*
- * Cntysoft OpenEngine
- * 
+ * Cntysoft Cloud Software Team
+ *
  * @author SOFTBOY <cntysoft@163.com>
- * copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
- * license    http://www.cntysoft.com/license/new-bsd     New BSD License
+ * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
+ * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
 /**
  * 因为我们的系统是WEBOS，那么我们系统的UI是完全可以使用Ext强大UI能力

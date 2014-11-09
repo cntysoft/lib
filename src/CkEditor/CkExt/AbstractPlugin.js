@@ -1,10 +1,9 @@
 /*
- * Cntysoft OpenEngine
- * 
+ * Cntysoft Cloud Software Team
+ *
  * @author SOFTBOY <cntysoft@163.com>
- * @author changwang <chenyongwang1104@163.com>
- * copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
- * license    http://www.cntysoft.com/license/new-bsd     New BSD License
+ * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
+ * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
 /**
  * 抽象的插件对象

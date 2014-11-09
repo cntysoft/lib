@@ -1,14 +1,14 @@
 /*
  * Cntysoft Cloud Software Team
- * 
+ *
  * @author SOFTBOY <cntysoft@163.com>
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
-Ext.define('Cntysoft.Component.TplSelect.Lang.zh_CN', {
-   extend : 'Cntysoft.Kernel.AbstractLangHelper',
-   data : {
-      TITLE : '模板选择窗口',
-      SELECT_EMPTY_TPL : '您当前没有选中任何模板'
-   }
+Ext.define('Cntysoft.Component.KvDict.Lang.zh_CN', {
+    extend : 'Cntysoft.Kernel.AbstractLangHelper',
+    data : {
+        TITLE : '键/值数据字典数据选择窗口',
+        VALUE : '数据项值'
+    }
 });
