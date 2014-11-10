@@ -11,7 +11,7 @@ Ext.define('Cntysoft.Component.Uploader.Lang.zh_CN', {
             REPLACE_ASK : '上传队列中已经存在文件 : [ {0} ] \n你是否想要替换队列中的文件?',
             ERROR_MSG : {
                 QUEUE_LIMIT_EXCEEDED : '您选择的文件数量超过了上传队列的大小限制 ({0}) 。',
-                FILE_EXCEEDS_SIZE_LIMIT : '文件: [ {0} ]大小超过了系统上传限制。',
+                FILE_EXCEEDS_SIZE_LIMIT : '文件: [ {0} ]大小超过了系统上传限制 : {1} MB。',
                 ZERO_BYTE_FILE : '文件 [ {0} ] 大小为空。',
                 INVALID_FILETYPE : '文件 [ {0} ] 类型错误, 系统支持的类型有 {1}',
                 UNKNOW : '未知错误'
