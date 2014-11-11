@@ -355,7 +355,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                requestUrl : '/ApiGate/Sys',
                uploadPath : this.EDITOR.defaultUploadPath,
                maxSize : this.EDITOR.uploadMaxSize,
-               requestMeta : {
+               apiRequestMeta : {
                   name : 'WebUploaderHandler',
                   method : 'process'
                },
