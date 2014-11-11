@@ -352,7 +352,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
             }, {
                xtype : 'cmpsimpleuploader',
                margin : '0 0 0 10',
-               requestUrl : '/ApiGate/Sys',
+               requestUrl : WebOs.Kernel.Const.API_GATE_SYS,
                uploadPath : this.EDITOR.defaultUploadPath,
                maxSize : this.EDITOR.uploadMaxSize,
                apiRequestMeta : {
