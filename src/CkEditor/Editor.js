@@ -121,9 +121,7 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
             if('' == Ext.String.trim(config.uploadMaxSize)) {
                 Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'uploadMaxSize is null');
             }
-            if(!Ext.isObject(config.uploadRequestMeta)) {
-                Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'uploadRequestMeta is null');
-            }
+
             var ckConfig = config.ckConfig || {};
             if(config.height){
                 ckConfig.height = config.height;
@@ -133,6 +131,9 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
             }
             this.LANG_TEXT = this.GET_ROOT_LANG_TEXT();
             this.callParent([config]);
+           if(!Ext.isObject(this.uploadRequestMeta)) {
+              Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'uploadRequestMeta is null');
+           }
             this.constructToolbar(ckConfig);
             this.ckConfig = new Cntysoft.Component.CkEditor.Config(ckConfig);
             delete config.ckConfig;
