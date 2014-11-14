@@ -14,23 +14,23 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
      * 文件浏览器，当文件项被点击时候显示的菜单
      * 
      * @protected
-     * @property {Ext.menu.Menu} [itemFileMenu = null] 
+     * @property {Ext.menu.Menu} [itemFileMenuRef = null]
      */
-    itemFileMenu : null,
+    itemFileMenuRef : null,
     /**
      * 文件夹项上下文菜单
      * 
      * @protected 
-     * @property {Ext.menu.Menu} [itemDirMenu = null]
+     * @property {Ext.menu.Menu} [itemDirMenuRef = null]
      */
-    itemDirMenu : null,
+    itemDirMenuRef : null,
     /**
      * 批量操作上下文菜单
      * 
      * @protected
-     * @property {Ext.menu.Menu} [batchMenu = null] 
+     * @property {Ext.menu.Menu} [batchMenuRef = null]
      */
-    batchMenu : null,
+    batchMenuRef : null,
     /**
      * 准备文件两个数据,设置缩短的文件名称 和 设置文件的icon类型
      * 
@@ -217,8 +217,8 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
         if('dir' == type){
             //每次都全新创建 这个可以保持按钮根据条件作出判断
             items = this.createDirItemMenuItems(items, record);
-            if(null == this.itemDirMenu){
-                this.itemDirMenu = new Ext.menu.Menu({
+            if(null == this.itemDirMenuRef){
+                this.itemDirMenuRef = new Ext.menu.Menu({
                     ignoreParentClicks : true,
                     width : 150,
                     items : items,
@@ -228,15 +228,15 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
                     }
                 });
             } else{
-                this.itemDirMenu.removeAll();
-                this.itemDirMenu.add(items);
+                this.itemDirMenuRef.removeAll();
+                this.itemDirMenuRef.add(items);
             }
-            return this.itemDirMenu;
+            return this.itemDirMenuRef;
         } else if('file' == type){
             //每次都全新创建 这个可以保持按钮根据条件作出判断
             items = this.createFileItemMenuItems(items, record);
-            if(null == this.itemFileMenu){
-                this.itemFileMenu = new Ext.menu.Menu({
+            if(null == this.itemFileMenuRef){
+                this.itemFileMenuRef = new Ext.menu.Menu({
                     ignoreParentClicks : true,
                     width : 150,
                     items : items,
@@ -246,10 +246,10 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
                     }
                 });
             } else{
-                this.itemFileMenu.removeAll();
-                this.itemFileMenu.add(items);
+                this.itemFileMenuRef.removeAll();
+                this.itemFileMenuRef.add(items);
             }
-            return this.itemFileMenu;
+            return this.itemFileMenuRef;
         } else{
             Cntysoft.raiseError(Ext.getClassName(this), 'createItemMenu', 'type : ' + type + ' is invalid');
         }
@@ -263,8 +263,8 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
     {
         var M_TEXT = this.ABSTRACT_LANG_TEXT.MENU;
         var M = this.self.A_MAP;
-        if(null == this.batchMenu){
-            this.batchMenu = new Ext.menu.Menu({
+        if(null == this.batchMenuRef){
+            this.batchMenuRef = new Ext.menu.Menu({
                 ignoreParentClicks : true,
                 width : 150,
                 listeners : {
@@ -283,7 +283,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
                     }]
             });
         }
-        return this.batchMenu;
+        return this.batchMenuRef;
     },
     itemRightClickHandler : function(view, record, item, index, event)
     {
