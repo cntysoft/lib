@@ -71,7 +71,7 @@ Ext.define('Cntysoft.Component.FsView.GridView', {
          rawName : {text : NAMES.NAME, dataIndex : 'rawName', flex : 1, resizable : false, menuDisabled : true},
          size : {text : NAMES.SIZE, width : 110, dataIndex : 'size', resizable : false, menuDisabled : true},
          type : {text : NAMES.TYPE, width : 100, dataIndex : 'type', resizable : false, menuDisabled : true, renderer : Ext.bind(this.fileTypeRenderer, this)},
-         mTime : {text : NAMES.M_TIME, width : 150, dataIndex : 'mTime', resizable : false, menuDisabled : true}
+         mTime : {text : NAMES.M_TIME, width : 180, dataIndex : 'mTime', resizable : false, menuDisabled : true}
       };
       var cols = [];
       var len = this.displayColumns.length;
