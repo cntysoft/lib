@@ -461,7 +461,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
             //对当前的文件路径进行刷新
             this.reloadView();
          } else{
-            Cntysoft.Kernel.Utils.processApiError(response);
+            Cntysoft.processApiError(response);
          }
       }, this);
    },
