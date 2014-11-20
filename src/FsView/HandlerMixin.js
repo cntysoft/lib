@@ -101,6 +101,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
    {
       var type = record.get('type');
       var fileVeItem = this.getVeMapItem(type);
+
       if(fileVeItem){
          var editable = fileVeItem[1];
          if(editable){
@@ -112,20 +113,18 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
                editor = this.editors.get(key);
                editor.show();
             } else{
-
                var me = this;
                //减少第一次的数据加载
                Cntysoft.showLoadScriptMask();
-
                Ext.require(editorCls, function(){
                   Cntysoft.hideLoadScriptMask();
                   editor = Ext.create(editorCls, {
                      filename : filename,
                      mode : 2, //编辑模式
-                     fsView : this,
+                     fsViewRef : this,
                      listeners : {
                         destroy : function(editor){
-                           delete editor.fsView;
+                           delete editor.fsViewRef;
                            me.editors.removeAtKey(key);
                         },
                         scope : me
@@ -150,7 +149,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
    {
       var M = this.self.A_MAP;
       var M_TEXT = this.ABSTRACT_LANG_TEXT.MENU;
-      var VE_MAP = this.self.VE_MAP;
+      var VE_MAP = this.getVeMapItem();
       var type = record.get('type');
       items = Ext.Array.merge(items, [{
          text : M_TEXT.RENAME,
@@ -745,7 +744,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
             editor = Ext.create(editorCls, {
                filename : filename,
                mode : 1, //全新模式
-               fsView : this,
+               fsViewRef : this,
                listeners : {
                   datasaved : function()
                   {
@@ -753,7 +752,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
                   },
                   destroy : function(editor)
                   {
-                     delete editor.fsView;
+                     delete editor.fsViewRef;
                   },
                   scope : me
                }

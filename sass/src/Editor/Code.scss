@@ -1,0 +1,26 @@
+.CodeMirror {
+  font-size:15px;
+
+}
+.CodeMirror-scroll{
+  box-sizing:content-box;
+  -webkit-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -ms-box-sizing:content-box;
+}
+.CodeMirror-gutters{
+  box-sizing:content-box;
+  -webkit-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -ms-box-sizing:content-box;
+}
+/**
+ * 风格覆盖
+ */
+.cm-s-solarized {
+  font-family: "微软雅黑", "宋体",Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace !important;
+  color-profile: sRGB;
+}
+.cm-s-solarized .CodeMirror-lines {
+  padding-left: 0px;
+}

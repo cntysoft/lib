@@ -22,7 +22,7 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
      * @inheritdoc
      */
     LANG_NAMESPACE : 'Cntysoft.Component.FsView.Lang',
-    fsView : null,
+    fsViewRef : null,
     LANG_TEXT : null,
     constructor : function(config)
     {
@@ -46,9 +46,9 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
     },
     initComponent : function()
     {
-        //检查fsView是否合法
-        if(!(this.fsView instanceof Cntysoft.Component.FsView.AbstractView)){
-            Cntysoft.raiseError(Ext.getClassName(this), 'initComponent', 'fsView must be the instance of Cntysoft.Component.FsView.AbstractView');
+        //检查fsViewRef是否合法
+        if(!(this.fsViewRef instanceof Cntysoft.Component.FsView.AbstractView)){
+            Cntysoft.raiseError(Ext.getClassName(this), 'initComponent', 'fsViewRef must be the instance of Cntysoft.Component.FsView.AbstractView');
         }
         this.addListener({
             afterrender : function(){
@@ -97,11 +97,11 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
     },
     itemClickHandler : function(panel, record)
     {
-        this.fsView.cd(record.get('id'));
+        this.fsViewRef.cd(record.get('id'));
     },
     destroy : function()
     {
-        delete this.fsView;
+        delete this.fsViewRef;
         delete this.LANG_TEXT;
         this.callParent();
     }

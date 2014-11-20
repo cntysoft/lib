@@ -87,22 +87,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
          NEW_FILE : 16,
          EDIT_FILE : 17
       },
-      /**
-       * 用于判断文件是否可以预览和编辑
-       * [预览, 编辑]
-       *
-       * @private
-       * @readonly
-       */
-      VE_MAP : {
-         js : [true, true, 'Cntysoft.Component.Editor.Code.Window'],
-         css : [true, true, 'Cntysoft.Component.Editor.Code.Window'],
-         html : [true, true, 'Cntysoft.Component.Editor.Code.Window'],
-         phtml : [true, true, 'Cntysoft.Component.Editor.Code.Window'],
-         php : [true, true, 'Cntysoft.Component.Editor.Code.Window'],
-         //img : [true, false, ''],
-         txt : [true, true, 'Cntysoft.Component.Editor.TextEditorWindow']
-      }
+
    },
    /**
     * @private
@@ -595,16 +580,15 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    /**
     * 获取预览编辑映射数据, 写这个函数为了给子类一个覆盖默认行为的机会
     *
+    * 用于判断文件是否可以预览和编辑
+    * [预览, 编辑, 编辑器类名称]
+    *
+    * js,css,html,phtml,php,txt
+    *
     * @param {String} fileType
     * @return {null | Array}
     */
-   getVeMapItem : function(fileType)
-   {
-      if(this.self.VE_MAP.hasOwnProperty(fileType)){
-         return this.self.VE_MAP[fileType];
-      }
-      return null;
-   },
+   getVeMapItem : Ext.emptyFn,
    /**
     * 获取系统文件目录的数据仓库
     *
@@ -785,7 +769,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
          margin : this.isShowPath ? '4 1 0 0' : '0 1 0 0',
          region : 'west',
          startPaths : this.startPaths,
-         fsView : this,
+         fsViewRef : this,
          listeners : {
             afterrender : function(tree)
             {
