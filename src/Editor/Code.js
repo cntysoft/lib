@@ -19,24 +19,24 @@ Ext.define('Cntysoft.Component.Editor.Code', {
        * @property {Object} THEME_MAP
        */
       THEME_TO_CSS_MAP : {
-         default : ['default', 'lib/codemirror.css'],
-         neat : ['neat', 'theme/neat.css'],
-         ambiance : ['ambiance', 'theme/ambiance.css'],
-         blackboard : ['blackboard', 'theme/blackboard.css'],
-         cobalt : ['cobalt', 'theme/cobalt.css'],
-         eclipse : ['eclipse', 'theme/eclipse.css'],
-         elegant : ['elegant', 'theme/elegant.css'],
-         erlangDark : ['erlang-dark', 'theme/erlang-dark.css'],
-         lesserDark : ['lesser-dark', 'theme/lesser-dark.css'],
-         monokai : ['monokai', 'theme/monokai.css'],
-         night : ['night', 'theme/night.css'],
-         rubyBlue : ['rubyblue', 'theme/rubyblue.css'],
-         solarizedDark : ['solarized dark', 'theme/solarized.css'],
-         solarizedLight : ['solarized light', 'theme/solarized.css'],
-         twilight : ['twilight', 'theme/twilight.css'],
-         vibrantInk : ['vibrant-ink', 'theme/vibrant-ink.css'],
-         xqDark : ['xq-dark', 'theme/xq-dark.css'],
-         xqLight : ['xq-light', 'theme/xq-light.css']
+         'default' : ['default', 'lib/codemirror.css'],
+         'neat' : ['neat', 'theme/neat.css'],
+         'ambiance' : ['ambiance', 'theme/ambiance.css'],
+         'blackboard' : ['blackboard', 'theme/blackboard.css'],
+         'cobalt' : ['cobalt', 'theme/cobalt.css'],
+         'eclipse' : ['eclipse', 'theme/eclipse.css'],
+         'elegant' : ['elegant', 'theme/elegant.css'],
+         'erlangDark' : ['erlang-dark', 'theme/erlang-dark.css'],
+         'lesserDark' : ['lesser-dark', 'theme/lesser-dark.css'],
+         'monokai' : ['monokai', 'theme/monokai.css'],
+         'night' : ['night', 'theme/night.css'],
+         'rubyBlue' : ['rubyblue', 'theme/rubyblue.css'],
+         'solarizedDark' : ['solarized dark', 'theme/solarized.css'],
+         'solarizedLight' : ['solarized light', 'theme/solarized.css'],
+         'twilight' : ['twilight', 'theme/twilight.css'],
+         'vibrantInk' : ['vibrant-ink', 'theme/vibrant-ink.css'],
+         'xqDark' : ['xq-dark', 'theme/xq-dark.css'],
+         'xqLight' : ['xq-light', 'theme/xq-light.css']
       },
       //很多模式暂时不需要
       MODES : {
