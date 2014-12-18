@@ -478,11 +478,12 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
     {
         var me = this;
         var LABEL = me.LANG_TEXT.LABEL;
+        var cfg = Shenen.getSysEnv().get(Christ.Const.ENV_SITE_SETTING);
         return {
             xtype : 'cmpgridfsview',
             title : this.LANG_TEXT.PANEL.IMAGE_POOL_TITLE,
             startPaths : [
-                this.EDITOR.defaultUploadPath
+                this.EDITOR.defaultUploadPath + '/' + cfg.siteId
             ],
             allowFileTypes : Cntysoft.Const.IMAGE_TYPES,
             displayColumns : ['rawName', 'size', 'type'],
