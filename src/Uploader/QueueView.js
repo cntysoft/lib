@@ -269,7 +269,7 @@ Ext.define('Cntysoft.Component.Uploader.QueueView', {
       this.uploader.removeListener('filequeued', this.fileQueuedHandler, this);
       this.uploader.removeListener('uploadsuccess', this.uploadSuccessHandler, this);
       this.uploader.removeListener('uploadstart', this.uploadStartHandler, this);
-      this.uploader.removeListener('clearqueue', this.clearQueueHandler, this);
+      //this.uploader.removeListener('clearqueue', this.clearQueueHandler, this);
       delete this.uploader;
       this.$_need_clear_queue_view = false;
       delete this.LANG_TEXT;
