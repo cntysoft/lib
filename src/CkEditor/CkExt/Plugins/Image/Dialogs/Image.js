@@ -478,7 +478,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
     {
         var me = this;
         var LABEL = me.LANG_TEXT.LABEL;
-        var cfg = Shenen.getSysEnv().get(Christ.Const.ENV_SITE_SETTING);
+        var cfg = WebOs.getSysEnv().get(WebOs.Const.ENV_SITE_SETTING);
         return {
             xtype : 'cmpgridfsview',
             title : this.LANG_TEXT.PANEL.IMAGE_POOL_TITLE,
