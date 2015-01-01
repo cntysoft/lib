@@ -135,6 +135,10 @@ Ext.define('Cntysoft.Component.TplSelect.Win', {
    {
       var records = this.fsViewRef.getSelectedItems();
       var record;
+      if(0 == records.length) {
+         Cntysoft.showErrorWindow(this.GET_LANG_TEXT('SELECT_EMPTY_TPL'));
+         return;
+      }
       record = records.shift();
       if(this.hasListeners.tplfileselected){
          this.fireEvent('tplfileselected', record.get('path') + '/' + record.get('rawName'))
