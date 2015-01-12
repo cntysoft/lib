@@ -86,7 +86,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
          SELECT_ALL : 15,
          NEW_FILE : 16,
          EDIT_FILE : 17
-      },
+      }
 
    },
    /**
