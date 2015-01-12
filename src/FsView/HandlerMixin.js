@@ -149,8 +149,8 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
    {
       var M = this.self.A_MAP;
       var M_TEXT = this.ABSTRACT_LANG_TEXT.MENU;
-      var VE_MAP = this.getVeMapItem();
       var type = record.get('type');
+      var actionValue = this.getVeMapItem(type);
       items = Ext.Array.merge(items, [{
          text : M_TEXT.RENAME,
          code : M.RENAME
@@ -164,8 +164,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
          text : M_TEXT.DELETE_FILE,
          code : M.DELETE_FILE
       }]);
-      if(VE_MAP.hasOwnProperty(type)){
-         var actionValue = VE_MAP[type];
+      if(!Ext.isEmpty(actionValue)){
          if(actionValue[1]){
             items.unshift({
                text : M_TEXT.EDIT,
