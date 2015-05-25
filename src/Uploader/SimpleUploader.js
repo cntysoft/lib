@@ -39,7 +39,7 @@ Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
    {
       this.addListener({
          uploadstart : this.startUploadFileHandler,
-         uploaderror : this.uploadFileErrorHandler,
+         //uploaderror : this.uploadFileErrorHandler,
          uploadsuccess : this.uploadFileSuccessHandler,
          filequeuederror : this.fileQueuedErrorHandler,
          uploadprogress : this.uploadProgressHandler

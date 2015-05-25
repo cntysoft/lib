@@ -427,7 +427,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
       Ext.Loader.loadScript({
          url : [
             '/JsLibrary/Jquery/jquery-1.10.1.min.js',
-            '/JsLibrary/WebUploader/webuploader.min.js'
+            '/JsLibrary/WebUploader/webuploader.js'
          ],
          onLoad : function() {
             this.setupConst();
@@ -477,9 +477,9 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
          swf : STD_PATH.getVenderPath() + '/WebUploader/Uploader.swf',
          chunked : true,
          fileNumLimit : this.queueSizeLimit,
-         //accept : {
-         //    extensions : this.fileTypeExts
-         //},
+         accept : {
+             extensions : this.fileTypeExts
+         },
          fileSingleSizeLimit : fileSingleSize,
          server : this.requestUrl,
          formData : this.getApiMetaInfo(),
