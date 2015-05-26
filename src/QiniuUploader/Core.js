@@ -157,6 +157,10 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
     *  @property {Number} null
     */
    siteId : null,
+   /**
+    * 上传之后的路径分类
+    */
+   path : null,
 
    constructor : function(config)
    {
@@ -296,7 +300,7 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
       Ext.Loader.loadScript({
          url : [
             '/JsLibrary/Jquery/jquery-1.10.1.min.js',
-            '/JsLibrary/WebUploader/webuploader.js'
+            '/JsLibrary/WebUploader/webuploader.min.js'
          ],
          onLoad : function() {
             this.setupConst();
@@ -378,9 +382,9 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
          swf : STD_PATH.getVenderPath() + '/WebUploader/Uploader.swf',
          chunked : this.chunked,
          fileNumLimit : this.queueSizeLimit,
-         //accept : {
-         //    extensions : this.fileTypeExts
-         //},
+         accept : {
+             extensions : this.fileTypeExts
+         },
          fileSingleSizeLimit : fileSingleSize,
          server : this.requestUrl,
          formData : this.getUploadFormData(),
@@ -558,7 +562,8 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
     */
    uploadBeforeSendHandler : function(obj, data, headers)
    {
-      var key = 'wd_' + this.siteId + '/' + data.name;
+      //云存储的路径规则： /shop1/Shop/xxx.jpg
+      var key = 'shop' + this.siteId + '/' + this.path + '/' + data.name;
       data["key"] = key;
       if(this.hasListeners.uploadbeforesend){
          this.fireEvent('uploadbeforesend', obj, data, headers, this);

@@ -427,7 +427,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
       Ext.Loader.loadScript({
          url : [
             '/JsLibrary/Jquery/jquery-1.10.1.min.js',
-            '/JsLibrary/WebUploader/webuploader.js'
+            '/JsLibrary/WebUploader/webuploader.min.js'
          ],
          onLoad : function() {
             this.setupConst();
