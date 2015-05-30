@@ -32,7 +32,8 @@ Ext.define('Cntysoft.Component.QiniuUploader.SimpleUploader', {
       Ext.apply(config, {
          multi : false,
          queueSizeLimit : 1,
-         autoStart : true
+         autoStart : true,
+         buttonText : this.LANG_TEXT.BROWSE
       });
    },
    initComponent : function()
@@ -59,13 +60,17 @@ Ext.define('Cntysoft.Component.QiniuUploader.SimpleUploader', {
          Cntysoft.showErrorWindow(msg);
       }
    },
-   uploadFileErrorHandler : function(file, errorInfo)
+   uploadFileErrorHandler : function(file, errorInfo, errorCode, uploader)
    {
       if(this.maskTarget){
          this.maskTarget.loadMask.hide();
       }
-      if(this.useBuildInErrorHandler){
-         Cntysoft.showErrorWindow(Ext.String.format(Cntysoft.GET_LANG_TEXT('ERROR.UPLOAD_ERR'), errorInfo.msg));
+      if(200 === errorCode) {
+         this.fireEvent('fileuploadsuccess', errorInfo, uploader);
+      }else {
+         if(this.useBuildInErrorHandler){
+            Cntysoft.showErrorWindow(Ext.String.format(Cntysoft.GET_LANG_TEXT('ERROR.UPLOAD_ERR'), errorInfo.msg));
+         }
       }
    },
    uploadFileSuccessHandler : function(file, data, uploader)

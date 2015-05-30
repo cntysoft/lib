@@ -32,14 +32,15 @@ Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
       Ext.apply(config, {
          multi : false,
          queueSizeLimit : 1,
-         autoStart : true
+         autoStart : true,
+         buttonText : this.LANG_TEXT.BROWSE
       });
    },
    initComponent : function()
    {
       this.addListener({
          uploadstart : this.startUploadFileHandler,
-         //uploaderror : this.uploadFileErrorHandler,
+         uploaderror : this.uploadFileErrorHandler,
          uploadsuccess : this.uploadFileSuccessHandler,
          filequeuederror : this.fileQueuedErrorHandler,
          uploadprogress : this.uploadProgressHandler
@@ -59,13 +60,17 @@ Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
          Cntysoft.showErrorWindow(msg);
       }
    },
-   uploadFileErrorHandler : function(file, errorInfo)
+   uploadFileErrorHandler : function(file, errorInfo, errorCode, uploader)
    {
       if(this.maskTarget){
          this.maskTarget.loadMask.hide();
       }
-      if(this.useBuildInErrorHandler){
-         Cntysoft.showErrorWindow(Ext.String.format(Cntysoft.GET_LANG_TEXT('ERROR.UPLOAD_ERR'), errorInfo.msg));
+      if(200 === errorCode) {
+         this.fireEvent('fileuploadsuccess', errorInfo, uploader);
+      }else {
+         if(this.useBuildInErrorHandler){
+            Cntysoft.showErrorWindow(Ext.String.format(Cntysoft.GET_LANG_TEXT('ERROR.UPLOAD_ERR'), errorInfo.msg));
+         }
       }
    },
    uploadFileSuccessHandler : function(file, data, uploader)

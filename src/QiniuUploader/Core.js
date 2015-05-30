@@ -152,12 +152,6 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
     */
    upToken : null,
    /**
-    * 当前的站点ID
-    *
-    *  @property {Number} null
-    */
-   siteId : null,
-   /**
     * 上传之后的路径分类
     */
    path : null,
@@ -165,9 +159,6 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
    constructor : function(config)
    {
       config = config || {};
-      if(!config.siteId) {
-         Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'siteId is null');
-      }
       this.mixins.langTextProvider.constructor.call(this);
       this.LANG_TEXT = this.GET_LANG_TEXT('CORE');
       this.applyConstraintConfig(config);
@@ -563,11 +554,22 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
    uploadBeforeSendHandler : function(obj, data, headers)
    {
       //云存储的路径规则： /shop1/Shop/xxx.jpg
-      var key = 'shop' + this.siteId + '/' + this.path + '/' + data.name;
+      var uniqid = this.getUniqid();
+      var key = this.path + '/' + uniqid +'_' +data.name;
       data["key"] = key;
       if(this.hasListeners.uploadbeforesend){
          this.fireEvent('uploadbeforesend', obj, data, headers, this);
       }
+   },
+
+   /**
+    *  生成唯一的识别ID
+    *
+    * @returns {string}
+    */
+   getUniqid : function()
+   {
+      return Math.random().toString(36).substr(2);
    },
 
    /**
