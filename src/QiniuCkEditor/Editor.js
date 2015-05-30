@@ -136,7 +136,7 @@ Ext.require('Cntysoft.Kernel.StdPath', function()
             Cntysoft.raiseError(Ext.getClassName(this), 'constructor', 'uploadRequestMeta is null');
          }
          this.constructToolbar(ckConfig);
-         this.ckConfig = new Cntysoft.Component.CkEditor.Config(ckConfig);
+         this.ckConfig = new Cntysoft.Component.QiniuCkEditor.Config(ckConfig);
          delete config.ckConfig;
       },
       /**
@@ -213,7 +213,7 @@ Ext.require('Cntysoft.Kernel.StdPath', function()
             CKEDITOR.on('instanceCreated', function(event)
             {
                var editor = event.editor;
-               editor.pluginManager = new Cntysoft.Component.CkEditor.CkExt.PluginManager({
+               editor.pluginManager = new Cntysoft.Component.QiniuCkEditor.CkExt.PluginManager({
                   EDITOR : CKEDITOR.OPEDITOR,
                   editorRef : event.editor,
                   plugins : this.ckConfig.cntysoftPlugins,

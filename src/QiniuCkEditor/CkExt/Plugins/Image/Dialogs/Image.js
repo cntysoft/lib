@@ -52,7 +52,7 @@ Ext.define('Cntysoft.Component.QiniuCkEditor.CkExt.Plugins.Image.Dialogs.Image',
     */
    heightFieldRef : null,
    /**
-    * @property {Cntysoft.COmponent.QiniuCkEditor.CkExt.Plugins.Image.Comp.ImageAlign} imageAlignRef
+    * @property {Cntysoft.Component.QiniuCkEditor.CkExt.Plugins.Image.Comp.ImageAlign} imageAlignRef
     */
    imageAlignRef : null,
    /**
@@ -63,12 +63,12 @@ Ext.define('Cntysoft.Component.QiniuCkEditor.CkExt.Plugins.Image.Dialogs.Image',
     * @property {Ext.tab.Panel} tabPanelRef
     */
    tabPanelRef : null,
-   /**
-    * 图片库对象
-    *
-    * @property {Cntysoft.Component.FsView.GridView} imagePool
-    */
-   imagePool : null,
+   ///**
+   // * 图片库对象
+   // *
+   // * @property {Cntysoft.Component.FsView.GridView} imagePool
+   // */
+   //imagePool : null,
    /**
     * 当前窗口的模式
     */
@@ -480,53 +480,53 @@ Ext.define('Cntysoft.Component.QiniuCkEditor.CkExt.Plugins.Image.Dialogs.Image',
          }
       };
    },
-   getImagePoolConfig : function()
-   {
-      var me = this;
-      var LABEL = me.LANG_TEXT.LABEL;
-      return {
-         xtype : 'cmpgridfsview',
-         title : this.LANG_TEXT.PANEL.IMAGE_POOL_TITLE,
-         startPaths : [
-            this.EDITOR.defaultUploadPath //这里
-         ],
-         allowFileTypes : Cntysoft.Const.IMAGE_TYPES,
-         displayColumns : ['rawName', 'size', 'type'],
-         createBBar : function()
-         {
-            return {
-               xtype : 'toolbar',
-               items : [{
-                  xtype : 'label',
-                  text : LABEL,
-                  cls : 'cntysoft-comp-gridview-toobar-label'
-               }]
-            };
-         },
-         listeners : {
-            afterrender : function(fsView)
-            {
-               var imagePreviewRef = fsView.imagePreview;
-               this.imagePool = fsView;
-            },
-            scope : this
-         },
-         itemDblClickHandler : function(view, record)
-         {
-            if(record.get('type') != 'dir') {
-               //处理图片选中
-               me.formRef.getForm().setValues({
-                  url : record.get('fullPath') + '/' + record.get('rawName')
-               });
-               me.imageUrlFieldBlurHandler(me.urlFieldRef);
-               this.imagePreviewRef.hide();
-               me.tabPanelRef.setActiveTab(0);
-            } else{
-               this.callParent(arguments);
-            }
-         }
-      };
-   },
+   //getImagePoolConfig : function()
+   //{
+   //   var me = this;
+   //   var LABEL = me.LANG_TEXT.LABEL;
+   //   return {
+   //      xtype : 'cmpgridfsview',
+   //      title : this.LANG_TEXT.PANEL.IMAGE_POOL_TITLE,
+   //      startPaths : [
+   //         this.EDITOR.defaultUploadPath //这里
+   //      ],
+   //      allowFileTypes : Cntysoft.Const.IMAGE_TYPES,
+   //      displayColumns : ['rawName', 'size', 'type'],
+   //      createBBar : function()
+   //      {
+   //         return {
+   //            xtype : 'toolbar',
+   //            items : [{
+   //               xtype : 'label',
+   //               text : LABEL,
+   //               cls : 'cntysoft-comp-gridview-toobar-label'
+   //            }]
+   //         };
+   //      },
+   //      listeners : {
+   //         afterrender : function(fsView)
+   //         {
+   //            var imagePreviewRef = fsView.imagePreview;
+   //            this.imagePool = fsView;
+   //         },
+   //         scope : this
+   //      },
+   //      itemDblClickHandler : function(view, record)
+   //      {
+   //         if(record.get('type') != 'dir') {
+   //            //处理图片选中
+   //            me.formRef.getForm().setValues({
+   //               url : record.get('fullPath') + '/' + record.get('rawName')
+   //            });
+   //            me.imageUrlFieldBlurHandler(me.urlFieldRef);
+   //            this.imagePreviewRef.hide();
+   //            me.tabPanelRef.setActiveTab(0);
+   //         } else{
+   //            this.callParent(arguments);
+   //         }
+   //      }
+   //   };
+   //},
    destroy : function()
    {
       delete this.LANG_TEXT;
@@ -537,7 +537,7 @@ Ext.define('Cntysoft.Component.QiniuCkEditor.CkExt.Plugins.Image.Dialogs.Image',
       delete this.formRef;
       delete this.widthFieldRef;
       delete this.heightFieldRef;
-      delete this.imagePool;
+      //delete this.imagePool;
       delete this.tabPanelRef;
       if(this.uploaderRef) {
          this.uploaderRef.destroy();
