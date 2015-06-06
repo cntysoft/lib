@@ -1,16 +1,16 @@
 /**
  * Cntysoft OpenEngine
  *
- * @author SOFTBOY <cntysoft@163.com>
+ * @author Changwang <chenyongwang1104@163.com>
  * copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
 /**
  * 简单按钮上传器， 这个上传器一次只能上传一个文件，不维护队列
  */
-Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
-   extend : 'Cntysoft.Component.Uploader.Core',
-   alias : 'widget.cmpsimpleuploader',
+Ext.define('Cntysoft.Component.QiniuUploader.SimpleUploader', {
+   extend : 'Cntysoft.Component.QiniuUploader.Core',
+   alias : 'widget.cmpqiniusimpleuploader',
    requires : [
       'Cntysoft.Kernel.StdPath'
    ],
