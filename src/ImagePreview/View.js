@@ -60,7 +60,7 @@ Ext.define('Cntysoft.Component.ImagePreview.View', {
          /**
           * 有些图片的名称都是数字，会出错误
           */
-         var id = url.replace(/[^A-Za-z0-9]/ig, '');
+         var id = url.replace(/[^A-Za-z0-9]/ig, '')+this.el.id;
          if(this.imagePool.containsKey(id)){
             if(this.imagePool.get(id)){
                //已经加载好， 可以进行显示了
