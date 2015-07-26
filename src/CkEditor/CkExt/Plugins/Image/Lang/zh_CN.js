@@ -35,7 +35,8 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Lang.zh_CN', {
          },
          LABEL : '双击选择图片',
          BTN : {
-            BROWSE : '浏览图片库'
+            BROWSE : '浏览图片库',
+            UPLOAD : '上传图片'
          }
       }
    }
