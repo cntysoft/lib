@@ -195,9 +195,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     */
    applyConstraintConfig : function(config)
    {
-      Ext.apply(config,{
-         buttonText : this.LANG_TEXT.BROWSE
-      });
+
    },
    initComponent : function()
    {
@@ -205,6 +203,9 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
          .replace(/,/g, '|')
          .replace(/\*/g, '.*');
       this.fileTypeRegex = new RegExp(this.fileTypeRegex, 'i');
+      if(!Ext.isDefined(this.buttonText)){
+         this.buttonText = this.LANG_TEXT.UPLOAD;
+      }
       this.callParent();
    },
    /**

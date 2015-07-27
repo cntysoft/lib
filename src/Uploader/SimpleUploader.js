@@ -26,7 +26,7 @@ Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
     * @property {Boolean} useBuildInErrorHandler
     */
    useBuildInErrorHandler : true,
-   buttonText : '',
+
    applyConstraintConfig : function(config)
    {
       this.callParent(config);
@@ -35,6 +35,7 @@ Ext.define('Cntysoft.Component.Uploader.SimpleUploader', {
          queueSizeLimit : 1,
          autoStart : true
       });
+
    },
    initComponent : function()
    {
