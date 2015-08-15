@@ -109,8 +109,8 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          items : {
             xtype : 'tabpanel',
             items : [
-               this.getRemotePanelConfig(),
-               this.getImagePoolConfig()
+               this.getRemotePanelConfig()
+               //this.getImagePoolConfig()
             ],
             listeners : {
                afterrender : function(panel)
@@ -338,18 +338,18 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   scope : this
                },
                name : 'url'
-            }, {
-               xtype : 'button',
-               text : UI_MSG.BTN.BROWSE,
-               listeners : {
-                  click : function()
-                  {
-                     this.tabPanelRef.setActiveTab(1);
-                  },
-                  scope : this
-               },
-               height : 32,
-               margin : '0 0 0 10'
+            //}, {
+            //   xtype : 'button',
+            //   text : UI_MSG.BTN.BROWSE,
+            //   listeners : {
+            //      click : function()
+            //      {
+            //         this.tabPanelRef.setActiveTab(1);
+            //      },
+            //      scope : this
+            //   },
+            //   height : 32,
+            //   margin : '0 0 0 10'
             }, {
                xtype : 'cmpsimpleuploader',
                margin : '0 0 0 10',
