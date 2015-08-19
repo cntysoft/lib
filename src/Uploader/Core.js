@@ -203,7 +203,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
          .replace(/,/g, '|')
          .replace(/\*/g, '.*');
       this.fileTypeRegex = new RegExp(this.fileTypeRegex, 'i');
-      if(!Ext.isDefined(this.buttonText)){
+      if(!Ext.isDefined(this.buttonText) || Ext.isEmpty(this.buttonText)){
          this.buttonText = this.LANG_TEXT.UPLOAD;
       }
       this.callParent();
