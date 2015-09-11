@@ -101,7 +101,7 @@ Ext.require('Cntysoft.Kernel.StdPath', function()
        * {
          *    url : '/Api/Sys',
          *    meta : {
-         *         name : 'WebUploaderHandler',
+         *         name : 'WebUploader',
          *         method : 'process'
          *    }
          * }

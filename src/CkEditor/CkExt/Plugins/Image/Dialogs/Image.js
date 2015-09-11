@@ -109,8 +109,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          items : {
             xtype : 'tabpanel',
             items : [
-               this.getRemotePanelConfig(),
-               this.getImagePoolConfig()
+               this.getRemotePanelConfig()
             ],
             listeners : {
                afterrender : function(panel)
@@ -295,7 +294,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
       this.previewRatio = img.width / img.height;
       this.formRef.getForm().setValues({
          height : img.height,
-         width : img.width
+         width : 800
       });
    },
    /**
@@ -305,7 +304,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    {
       data = data.shift();
       this.formRef.getForm().setValues({
-         url : data.filename
+         url : FH.getZhuChaoImageUrl(data.filename)
       });
       if(this.EDITOR.hasListeners.filerefrequest){
          this.EDITOR.fireEvent('filerefrequest', data);
@@ -338,18 +337,6 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   scope : this
                },
                name : 'url'
-            }, {
-               xtype : 'button',
-               text : UI_MSG.BTN.BROWSE,
-               listeners : {
-                  click : function()
-                  {
-                     this.tabPanelRef.setActiveTab(1);
-                  },
-                  scope : this
-               },
-               height : 32,
-               margin : '0 0 0 10'
             }, {
                xtype : 'cmpsimpleuploader',
                margin : '0 0 0 10',
@@ -392,7 +379,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                }, {
                   xtype : 'numberfield',
                   fieldLabel : F_TEXT.WIDTH,
-                  value : 1,
+                  value : 800,
                   minValue : 1,
                   name : 'width',
                   listeners : {
@@ -475,53 +462,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          }
       };
    },
-   getImagePoolConfig : function()
-   {
-      var me = this;
-      var LABEL = me.LANG_TEXT.LABEL;
-      return {
-         xtype : 'cmpgridfsview',
-         title : this.LANG_TEXT.PANEL.IMAGE_POOL_TITLE,
-         startPaths : [
-            this.EDITOR.defaultUploadPath //这里
-         ],
-         allowFileTypes : Cntysoft.Const.IMAGE_TYPES,
-         displayColumns : ['rawName', 'size', 'type'],
-         createBBar : function()
-         {
-            return {
-               xtype : 'toolbar',
-               items : [{
-                  xtype : 'label',
-                  text : LABEL,
-                  cls : 'cntysoft-comp-gridview-toobar-label'
-               }]
-            };
-         },
-         listeners : {
-            afterrender : function(fsView)
-            {
-               var imagePreviewRef = fsView.imagePreview;
-               this.imagePool = fsView;
-            },
-            scope : this
-         },
-         itemDblClickHandler : function(view, record)
-         {
-            if(record.get('type') != 'dir'){
-               //处理图片选中
-               me.formRef.getForm().setValues({
-                  url : record.get('fullPath') + '/' + record.get('rawName')
-               });
-               me.imageUrlFieldBlurHandler(me.urlFieldRef);
-               this.imagePreviewRef.hide();
-               me.tabPanelRef.setActiveTab(0);
-            } else{
-               this.callParent(arguments);
-            }
-         }
-      };
-   },
+
    destroy : function()
    {
       delete this.LANG_TEXT;
@@ -532,7 +473,6 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
       delete this.formRef;
       delete this.widthFieldRef;
       delete this.heightFieldRef;
-      delete this.imagePool;
       delete this.tabPanelRef;
       if(this.uploaderRef){
          this.uploaderRef.destroy();

@@ -20,8 +20,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Lang.zh_CN', {
       DIALOGS : {
          DIALOG_TITLE : '图片管理器窗口',
          PANEL : {
-            REMOTE_TITLE : '远程图片',
-            IMAGE_POOL_TITLE : '图片库'
+            REMOTE_TITLE : '远程图片'
          },
          FIELDS : {
             IMAGE_URL : '图片地址',
@@ -35,7 +34,6 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Lang.zh_CN', {
          },
          LABEL : '双击选择图片',
          BTN : {
-            BROWSE : '浏览图片库',
             UPLOAD : '上传图片'
          }
       }
