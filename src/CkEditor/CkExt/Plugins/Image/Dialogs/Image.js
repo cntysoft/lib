@@ -337,6 +337,21 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   scope : this
                },
                name : 'url'
+<<<<<<< HEAD
+=======
+            //}, {
+            //   xtype : 'button',
+            //   text : UI_MSG.BTN.BROWSE,
+            //   listeners : {
+            //      click : function()
+            //      {
+            //         this.tabPanelRef.setActiveTab(1);
+            //      },
+            //      scope : this
+            //   },
+            //   height : 32,
+            //   margin : '0 0 0 10'
+>>>>>>> a1e3255725c6973f0a7a96f24b8283a5b2f4baa4
             }, {
                xtype : 'cmpsimpleuploader',
                margin : '0 0 0 10',
