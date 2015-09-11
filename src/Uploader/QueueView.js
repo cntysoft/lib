@@ -86,7 +86,6 @@ Ext.define('Cntysoft.Component.Uploader.QueueView', {
                   var F_STATUS = Ext.getClass(this.uploader).FILE_STATUS;
                   var record = view.getRecord(tip.triggerElement);
                   if(record.get('status') == F_STATUS.ERROR){
-                     console.log(record);
                      tip.update('<span style = "color:red">' + record.get('errorMsg') + '</span>');
                   }else{
                      return false;

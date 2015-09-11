@@ -131,6 +131,12 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     */
    targetName : '',
    /**
+    * 是否使用OSS储存上传的文件
+    * 
+    * @property {String} useOss
+    */
+   useOss : true,
+   /**
     * 百度上传组建引用
     *
     * @property {WebUploader} webUploader
@@ -402,6 +408,20 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
       return this;
    },
    /**
+    * 是否将上传文件保存在OSS服务器上
+    *
+    * @param {Boolean} flag
+    * @return {Cntysoft.Component.Uploadify.Core}
+    */
+   setUseOss : function(flag)
+   {
+      this.useOss = !!flag;
+      if(this.webUploader){
+         this.applyConfigToUploader();
+      }
+      return this;
+   },
+   /**
     * 检查上传路径是否合法
     * @TODO 暂时禁用这个方法，因为每个项目的上传路径不一样
     *
@@ -544,7 +564,8 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
             randomize : this.randomize,
             createSubDir : this.createSubDir,
             targetName : this.targetName,
-            enableNail : this.enableNail //是否生成缩略图
+            enableNail : this.enableNail, //是否生成缩略图
+            useOss : this.useOss
          }),
          REQUEST_SECURITY : Ext.JSON.encode({})
       };
