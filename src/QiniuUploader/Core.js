@@ -51,7 +51,7 @@ Ext.define('Cntysoft.Component.QiniuUploader.Core', {
     */
    width : 85,
    /**
-    * @readyonly
+    * @readonly
     * @property {Number} fileSingleSizeLimit 上传文件大小， 这个由服务器端确定
     */
    fileSingleSizeLimit : null,

@@ -1,4 +1,4 @@
-/**
+/*
  * Cntysoft OpenEngine
  *
  * @author SOFTBOY <cntysoft@163.com>
@@ -52,7 +52,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     */
    width : 85,
    /**
-    * @readyonly
+    * @readonly
     * @property {Number} fileSingleSizeLimit 上传文件大小， 这个由服务器端确定
     */
    fileSingleSizeLimit : null,
@@ -423,7 +423,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
    },
    /**
     * 检查上传路径是否合法
-    * @TODO 暂时禁用这个方法，因为每个项目的上传路径不一样
+    * 暂时禁用这个方法，因为每个项目的上传路径不一样
     *
     * @param {String} path
     * @return {Boolean}

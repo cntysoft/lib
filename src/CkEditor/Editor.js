@@ -83,19 +83,19 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
          */
         tooltipRef : null,
         /**
-         * @TODO 这里传入默认的上传路径,  这里是作为独立库的惟一的配置入口
+         * 这里传入默认的上传路径,  这里是作为独立库的惟一的配置入口
          *
          * @property {String} defaultUploadPath
          */
         defaultUploadPath : null,
         /**
-         * @TODO 这里是作为独立库的惟一的配置入口
+         * 这里是作为独立库的惟一的配置入口
          *
          * @property {Mixed} uploadMaxSize
          */
         uploadMaxSize : null,
         /**
-         * @TODO 这里是作为独立库的惟一的配置入口
+         * 这里是作为独立库的惟一的配置入口
          *
          * {
          *    url : '/Api/Sys',

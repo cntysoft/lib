@@ -3,6 +3,9 @@
  * copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * 文件选择窗口程序语言包
+ */
 Ext.define('Cntysoft.Component.FsView.Lang.zh_CN', {
     extend : 'Cntysoft.Kernel.AbstractLangHelper',
     data : {

@@ -1,9 +1,12 @@
-/**
+/*
  * Cntysoft Cloud Software Team
  *
  * @author Changwang <chenyongwang1104@163.com>
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
+ */
+/**
+ * 七牛上传组件错误处理类
  */
 Ext.define('Cntysoft.Component.QiniuUploader.ErrorHandler', {
    singleton: true,
