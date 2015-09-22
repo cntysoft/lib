@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * 系统底层组件库图片预览View
+ */
 Ext.define('Cntysoft.Component.ImagePreview.View', {
    extend : 'Ext.tip.ToolTip',
    requires : [
