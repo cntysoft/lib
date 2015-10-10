@@ -32,7 +32,6 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
             'Cntysoft.Component.CkEditor.CkExt.DialogCommand',
             'Cntysoft.Component.CkEditor.CkExt.PluginManager',
             'Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Main',
-            'Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign',
             'Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image'
         ],
         /**

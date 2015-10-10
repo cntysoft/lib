@@ -13,7 +13,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    requires : [
       'Cntysoft.Component.FsView.GridView',
       'Cntysoft.Kernel.StdPath',
-      'Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign',
+//      'Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign',
       'Cntysoft.Component.Uploader.SimpleUploader'
    ],
    mixins : {
@@ -51,10 +51,10 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
     * @property {Ext.form.field.Number} heightFieldRef
     */
    heightFieldRef : null,
-   /**
-    * @property {Cntysoft.COmponent.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign} imageAlignRef
-    */
-   imageAlignRef : null,
+//   /**
+//    * @property {Cntysoft.COmponent.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign} imageAlignRef
+//    */
+//   imageAlignRef : null,
    /**
     * @property {DomElement} imageElement
     */
@@ -174,7 +174,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
          for(var i = 0; i < fields.length; i++) {
             fields[i].resumeEvents();
          }
-         this.imageAlignRef.setValue(values.floatStyle);
+//         this.imageAlignRef.setValue(values.floatStyle);
       } else{
          this.mode = this.self.M_NEW;
       }
@@ -183,7 +183,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    {
       var values = this.formRef.getValues();
       var url = Ext.String.trim(values.url);
-      values.floatStyle = this.imageAlignRef.getValue();
+//      values.floatStyle = this.imageAlignRef.getValue();
       var style = {
          'padding' : '1px',
          'border-width' : values.border + 'px',
@@ -230,7 +230,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    resetDialog : function()
    {
       this.formRef.getForm().reset();
-      this.imageAlignRef.reset();
+//      this.imageAlignRef.reset();
       this.tabPanelRef.setActiveTab(0);
       if(this.imagePool){
          this.imagePool.cd2InitDir();
@@ -419,19 +419,21 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                   fieldLabel : F_TEXT.IMG_DES,
                   height : 80,
                   name : 'description'
-               }, new Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign({
-                  height : 40,
-                  labelWidth : 80,
-                  fieldLabel : F_TEXT.ALIGN_TYPE,
-                  mainRef : this.mainRef,
-                  name : 'align',
-                  listeners : {
-                     afterrender : function(comp){
-                        this.imageAlignRef = comp;
-                     },
-                     scope : this
-                  }
-               })]
+               }
+//               , new Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Comp.ImageAlign({
+//                  height : 40,
+//                  labelWidth : 80,
+//                  fieldLabel : F_TEXT.ALIGN_TYPE,
+//                  mainRef : this.mainRef,
+//                  name : 'align',
+//                  listeners : {
+//                     afterrender : function(comp){
+//                        this.imageAlignRef = comp;
+//                     },
+//                     scope : this
+//                  }
+//               })
+            ]
             }, {
                xtype : 'component',
                width : 315,
@@ -467,7 +469,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    {
       delete this.LANG_TEXT;
       delete this.imagePreviewRef;
-      delete this.imageAlignRef;
+//      delete this.imageAlignRef;
       delete this.lockFieldRef;
       delete this.urlFieldRef;
       delete this.formRef;
