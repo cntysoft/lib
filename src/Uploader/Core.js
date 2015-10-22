@@ -137,6 +137,12 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     */
    useOss : true,
    /**
+    * 上传的并发数目
+    * 
+    * @property {Number} threads
+    */
+   threads : 3,
+   /**
     * 百度上传组建引用
     *
     * @property {WebUploader} webUploader
@@ -504,7 +510,8 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
          fileSingleSizeLimit : fileSingleSize,
          server : this.requestUrl,
          formData : this.getApiMetaInfo(),
-         compress : false//暂时压缩，这个特性把我害惨了，组件在这个地方有个小bug
+         compress : false, //暂时压缩，这个特性把我害惨了，组件在这个地方有个小bug
+         threads : this.threads
       };
    },
    /**
