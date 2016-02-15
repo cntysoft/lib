@@ -133,7 +133,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
    /**
     * 是否使用OSS储存上传的文件
     * 
-    * @property {String} useOss
+    * @property {Boolean} useOss
     */
    useOss : true,
    /**
@@ -173,10 +173,11 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
     */
    queueErrorMsg : '',
    /**
-    * {String} uploadPath
+    * 上传之后的图片是否需要进行裁剪
+    * 
+    * @property {Boolean} needCrop
     */
-   uploadPath : null,
-
+   needCrop : false,
    /**
     * 请求Api接口信息
     *
@@ -572,7 +573,8 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
             createSubDir : this.createSubDir,
             targetName : this.targetName,
             enableNail : this.enableNail, //是否生成缩略图
-            useOss : this.useOss
+            useOss : this.useOss,
+            needCrop : this.needCrop
          }),
          REQUEST_SECURITY : Ext.JSON.encode({})
       };
