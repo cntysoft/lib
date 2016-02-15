@@ -197,7 +197,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
       this.setupAllowedPaths();
       this.callParent([config]);
       if(!this.maxSize){
-         this.getUploadLimitSize();
+         this.maxSize = this.getUploadLimitSize();
       }
       if(this.enableFileRef){
          this.createSubDir = true;
@@ -627,9 +627,9 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
    /**
     * webuploader一些错误处理, 比如队列长度溢出，单个文件大小溢出等等
     */
-   errorHandler : function(type)
+   errorHandler : function(type, size, file)
    {
-      this.fileQueueErrorHandler(null, type);
+      this.fileQueueErrorHandler(file, type);
    },
    /**
     * 文件加入队列之前错误探测
@@ -644,7 +644,7 @@ Ext.define('Cntysoft.Component.Uploader.Core', {
          this.queueErrorMsg += Ext.String.format(errorMap.ZERO_BYTE_FILE, file.name) + '</br>';
       } else if(errorType == 'fileTypeError'){
          this.queueErrorMsg += Ext.String.format(errorMap.INVALID_FILETYPE, file.name, this.fileTypeExts) + '</br>';
-      } else if(errorType == 'exceed_size'){
+      } else if(errorType == 'F_EXCEED_SIZE'){
          this.queueErrorMsg += Ext.String.format(errorMap.FILE_EXCEEDS_SIZE_LIMIT, file.name, this.maxSize) + '</br>';
       } else if(errorType == 'Q_EXCEED_NUM_LIMIT'){
          this.queueErrorMsg += Ext.String.format(errorMap.QUEUE_LIMIT_EXCEEDED, this.queueSizeLimit) + '</br>';
