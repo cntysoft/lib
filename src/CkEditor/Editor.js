@@ -94,6 +94,12 @@ Ext.require('Cntysoft.Kernel.StdPath', function(){
          */
         uploadMaxSize : null,
         /**
+         * 配置是否上传图片到阿里云
+         *
+         * @property {Boolean} useOss
+         */
+        useOss : false,
+        /**
          * 这里是作为独立库的惟一的配置入口
          *
          * {

@@ -303,11 +303,9 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
    uploadSuccessHandler : function(data)
    {
       data = data.shift();
-      this.formRef.getForm().setValues({
-         url : FH.getZhuChaoImageUrl(data.filename)
-      });
+      var form = this.formRef.getForm();
       if(this.EDITOR.hasListeners.filerefrequest){
-         this.EDITOR.fireEvent('filerefrequest', data);
+         this.EDITOR.fireEvent('filerefrequest', data, form);
       }
       this.imageUrlFieldBlurHandler(this.urlFieldRef);
    },
@@ -343,6 +341,7 @@ Ext.define('Cntysoft.Component.CkEditor.CkExt.Plugins.Image.Dialogs.Image', {
                requestUrl : requestMeta.url,
                uploadPath : this.EDITOR.defaultUploadPath,
                maxSize : this.EDITOR.uploadMaxSize,
+               useOss : this.EDITOR.useOss,
                apiRequestMeta : requestMeta.meta,
                fileTypeExts : ['gif', 'png', 'jpg', 'jpeg'],
                maskTarget : this,
