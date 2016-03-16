@@ -11,26 +11,26 @@
  * 抽象系统文件系统浏览器,主要定义一些交互函数 。 对于事件处理函数请看 {@link Cntysoft.Component.FsView.HandlerMixin}
  * @abstract
  */
-Ext.define('Cntysoft.Component.FsView.AbstractView', {
-   extend : 'Ext.container.Container',
+Ext.define("Cntysoft.Component.FsView.AbstractView", {
+   extend : "Ext.container.Container",
    requires : [
-      'Cntysoft.Kernel.StdPath',
-      'SenchaExt.Data.Proxy.ApiProxy',
-      'Cntysoft.Utils.Common',
-      'Cntysoft.Component.FsView.FsTree',
-      'Cntysoft.Framework.Core.Filesystem',
-      'Cntysoft.Stdlib.Common',
+      "Cntysoft.Kernel.StdPath",
+      "SenchaExt.Data.Proxy.ApiProxy",
+      "Cntysoft.Utils.Common",
+      "Cntysoft.Component.FsView.FsTree",
+      "Cntysoft.Framework.Core.Filesystem",
+      "Cntysoft.Stdlib.Common",
       //Lang
-      'Cntysoft.Component.FsView.Lang.zh_CN'
+      "Cntysoft.Component.FsView.Lang.zh_CN"
    ],
    mixins : {
-      menuHandler : 'Cntysoft.Component.FsView.HandlerMixin',
-      langTextProvider : 'Cntysoft.Mixin.LangTextProvider'
+      menuHandler : "Cntysoft.Component.FsView.HandlerMixin",
+      langTextProvider : "Cntysoft.Mixin.LangTextProvider"
    },
    /**
     * @inheritdoc
     */
-   LANG_NAMESPACE : 'Cntysoft.Component.FsView.Lang',
+   LANG_NAMESPACE : "Cntysoft.Component.FsView.Lang",
    inheritableStatics : {
       /**
        * @private
@@ -38,19 +38,19 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
        * @property {Object} FILE_TYPE_MAP 文件类型的显示图片
        */
       FILE_TYPE_MAP : {
-         dir : 'Dir.png',
-         css : 'Css.png',
-         js : 'Js.png',
-         php : 'Php.png',
-         html : 'Html.png',
-         phtml : 'Phtml.png',
-         txt : 'File.png',
-         xml : 'Xml.png',
-         gif : 'Gif.png',
-         jpg : 'Jpg.png',
-         jpeg : 'Jpg.png',
-         png : 'Png.png',
-         swf : 'Swf.png'
+         dir : "Dir.png",
+         css : "Css.png",
+         js : "Js.png",
+         php : "Php.png",
+         html : "Html.png",
+         phtml : "Phtml.png",
+         txt : "File.png",
+         xml : "Xml.png",
+         gif : "Gif.png",
+         jpg : "Jpg.png",
+         jpeg : "Jpg.png",
+         png : "Png.png",
+         swf : "Swf.png"
       },
       /**
        * @private
@@ -58,10 +58,10 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
        * @property {String[]}  IMG_TYPE 图片类型
        */
       IMG_TYPE : [
-         'gif',
-         'jpg',
-         'jpeg',
-         'png'
+         "gif",
+         "jpg",
+         "jpeg",
+         "png"
       ],
       /**
        * @private
@@ -163,7 +163,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     *
     * @property {String} allFileTypes
     */
-   allowFileTypes : '*',
+   allowFileTypes : "*",
    /**
     * @property {Array} clipboard
     */
@@ -203,7 +203,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    constructor : function(config)
    {
       this.mixins.langTextProvider.constructor.call(this);
-      this.ABSTRACT_LANG_TEXT = this.GET_LANG_TEXT('ABSTRACT_VIEW');
+      this.ABSTRACT_LANG_TEXT = this.GET_LANG_TEXT("ABSTRACT_VIEW");
       this.editors = new Ext.util.HashMap();
       this.callParent([config]);
    },
@@ -211,21 +211,21 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    {
       //检查startpaths不能为空
       if(!this.startPaths || 0 == this.startPaths.length){
-         Cntysoft.raiseError(Ext.getClassName(this), 'initComponent', 'startPaths can not be empty');
+         Cntysoft.raiseError(Ext.getClassName(this), "initComponent", "startPaths can not be empty");
       }
       this.callParent();
       if(this.isShowPath){
          Ext.apply(this, {
             layout : {
-               type : 'vbox',
-               align : 'stretch'
+               type : "vbox",
+               align : "stretch"
             }
          });
          this.add({
-            xtype : 'container',
-            layout : 'hbox',
-            margins : '3 0 0 0',
-            style : 'border-bottom: 1px solid #3892D3',
+            xtype : "container",
+            layout : "hbox",
+            margins : "3 0 0 0",
+            style : "border-bottom: 1px solid #3892D3",
             items : [this.getLabelConfig(), this.getCdParentBtn()]
          });
          this.addListener({
@@ -235,7 +235,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
       } else{
          Ext.apply(this, {
             layout : {
-               type : 'fit'
+               type : "fit"
             }
          });
       }
@@ -255,7 +255,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     */
    refresh : function()
    {
-      if(this.fireEvent('beforecd', this.path)){
+      if(this.fireEvent("beforecd", this.path)){
          this.getFsStore().load({
             params : {
                path : this.path
@@ -269,7 +269,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    cd : function(path)
    {
       if(path != this.path){
-         if(this.fireEvent('beforecd', path)){
+         if(this.fireEvent("beforecd", path)){
             var store = this.getFsStore();
             var proxy = store.getProxy();
             proxy.setInvokeParams({
@@ -285,18 +285,12 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    cd2InitDir : function(){
       var store = this.getFsStore();
       var proxy = store.getProxy();
-      proxy.setInvokeMetaInfo({
-         name : 'Filesystem',
-         method : 'getStartDirPaths'
-      });
+      proxy.setInvokeMetaInfoItem("method", "getStartDirPaths");
       proxy.setInvokeParams({
          startPaths : this.startPaths
       });
       store.load();
-      proxy.setInvokeMetaInfo({
-         name : 'Filesystem',
-         method : 'ls'
-      });
+      proxy.setInvokeMetaInfoItem("method", "ls");
    },
    /**
     * 返回上一级菜单
@@ -308,10 +302,10 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
          this.cd2InitDir();
          return;
       }
-      if('' == path){
+      if("" == path){
          return;
       }
-      pos = path.lastIndexOf('/');
+      pos = path.lastIndexOf("/");
       path = path.substring(0, pos);
       this.cd(path);
    },
@@ -319,8 +313,8 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     * 进入当前目录指定的子目录
     */
    cd2ChildDir : function(name){
-      if('' != this.path){
-         name = this.path + '/' + name;
+      if("" != this.path){
+         name = this.path + "/" + name;
       }
       this.cd(name);
    },
@@ -335,7 +329,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
       var store = this.getFsStore();
       var exist = false;
       store.each(function(entry){
-         if('dir' == entry.get('type') && name == entry.get('rawName')){
+         if("dir" == entry.get("type") && name == entry.get("rawName")){
             exist = true;
             return false;
          }
@@ -353,7 +347,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
       var store = this.getFsStore();
       var exist = false;
       store.each(function(entry){
-         if('dir' !== entry.get('type') && name == entry.get('rawName')){
+         if("dir" !== entry.get("type") && name == entry.get("rawName")){
             exist = true;
             return false;
          }
@@ -385,7 +379,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     */
    copy : function(items)
    {
-      this.clipboard.type = 'copy';
+      this.clipboard.type = "copy";
       this.clipboard.items = items;
    },
    /**
@@ -395,7 +389,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     */
    cut : function(items)
    {
-      this.clipboard.type = 'cut';
+      this.clipboard.type = "cut";
       this.clipboard.items = items;
    },
    /**
@@ -418,7 +412,7 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
                //对当前的文件路径进行刷新
                this.reloadView();
             } else{
-               Cntysoft.Kernel.Utils.processApiError(response, this.GET_LANG_TEXT('ERROR_MAP'), {
+               Cntysoft.Kernel.Utils.processApiError(response, this.GET_LANG_TEXT("ERROR_MAP"), {
                   10006 : [this.path]
                });
                this.reloadView();
@@ -599,31 +593,31 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
       if(null == this.fsStore){
          this.fsStore = new Ext.data.Store({
             fields : [
-               {name : 'name', type : 'string', persist : false},
-               {name : 'rawName', type : 'string', persist : false},
-               {name : 'icon', type : 'string', persist : false},
-               {name : 'type', type : 'string', persist : false},
-               {name : 'cTime', type : 'string', persist : false},
-               {name : 'mTime', type : 'string', persist : false},
-               {name : 'isReadable', type : 'boolean', persist : false},
-               {name : 'isWritable', type : 'boolean', persist : false},
-               {name : 'isStartup', type : 'boolean', persist : false},
-               {name : 'size', type : 'string', persist : false},
-               {name : 'fullPath', type : 'string', persist : false}
+               {name : "name", type : "string", persist : false},
+               {name : "rawName", type : "string", persist : false},
+               {name : "icon", type : "string", persist : false},
+               {name : "type", type : "string", persist : false},
+               {name : "cTime", type : "string", persist : false},
+               {name : "mTime", type : "string", persist : false},
+               {name : "isReadable", type : "boolean", persist : false},
+               {name : "isWritable", type : "boolean", persist : false},
+               {name : "isStartup", type : "boolean", persist : false},
+               {name : "size", type : "string", persist : false},
+               {name : "fullPath", type : "string", persist : false}
             ],
             proxy : {
-               type : 'apigateway',
-               callType : 'Sys',
+               type : "apigateway",
+               callType : "Sys",
                reader : {
-                  type : 'json',
-                  rootProperty : 'entries'
+                  type : "json",
+                  rootProperty : "entries"
                },
                invokeMetaInfo : {
-                  name : 'Filesystem',
-                  method : 'ls'
+                  name : "Filesystem",
+                  method : "ls"
                },
                pArgs : [{
-                  key : 'allowFileTypes',
+                  key : "allowFileTypes",
                   value : this.allowFileTypes
                }],
                listeners : {
@@ -650,9 +644,9 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     */
    updateLabelText : function(path)
    {
-      path = '/' + path;
+      path = "/" + path;
       var text = this.ABSTRACT_LANG_TEXT.CURRENT_PATH;
-      this.pathLabelRef.update(text + ':  ' + path);
+      this.pathLabelRef.update(text + ":  " + path);
    },
    /**
     * 刷新当前的view，子类覆盖的方法
@@ -695,8 +689,8 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    fileTypeFilter : function(record)
    {
       var allowTypes = this.allowFileTypes;
-      var type = record.get('type');
-      if('*' == allowTypes){
+      var type = record.get("type");
+      if("*" == allowTypes){
          return true;
       } else if(Ext.isArray(allowTypes)){
          return Ext.Array.contains(allowTypes, type);
@@ -710,17 +704,17 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
     */
    itemDblClickHandler : function(view, record)
    {
-      var type = record.get('type');
-      var isStart = record.get('isStartup');
+      var type = record.get("type");
+      var isStart = record.get("isStartup");
       var path;
       //判断是否选中
-      if(type == 'dir'){
+      if(type == "dir"){
          //判断是否是目录
          if(isStart){
             //开始的时候路径在record里面获取
-            path = record.get('startupPath');
+            path = record.get("startupPath");
          } else{
-            path = this.path + '/' + record.get('rawName');
+            path = this.path + "/" + record.get("rawName");
          }
          this.cd(path);
       } else{
@@ -738,15 +732,15 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
          return this.iconMap[type];
       }
       var S = this.self;
-      var base = Cntysoft.Kernel.StdPath.getWebOsImagePath() + '/Os/Component/FsView';
+      var base = Cntysoft.Kernel.StdPath.getWebOsImagePath() + "/Os/Component/FsView";
       var icon;
       var type;
       if(undefined == S.FILE_TYPE_MAP[type]){
-         iconType = S.FILE_TYPE_MAP['txt'];
+         iconType = S.FILE_TYPE_MAP["txt"];
       } else{
          iconType = S.FILE_TYPE_MAP[type];
       }
-      icon = base + '/' + iconType;
+      icon = base + "/" + iconType;
       this.iconMap[type] = icon;
       return icon;
    },
@@ -763,11 +757,11 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    getFsTreeConfig : function()
    {
       return {
-         xtype : 'cntsmfstree',
+         xtype : "cntsmfstree",
          width : 250,
          border : true,
-         margin : this.isShowPath ? '4 1 0 0' : '0 1 0 0',
-         region : 'west',
+         margin : this.isShowPath ? "4 1 0 0" : "0 1 0 0",
+         region : "west",
          startPaths : this.startPaths,
          fsViewRef : this,
          listeners : {
@@ -787,10 +781,10 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    getLabelConfig : function()
    {
       return {
-         xtype : 'label',
+         xtype : "label",
          height : 25,
-         margin : '0 0 0 5',
-         padding : '5 0 0 0',
+         margin : "0 0 0 5",
+         padding : "5 0 0 0",
          flex : 1,
          listeners : {
             afterrender : function(label)
@@ -805,9 +799,9 @@ Ext.define('Cntysoft.Component.FsView.AbstractView', {
    {
       var T = this.ABSTRACT_LANG_TEXT.BTN;
       return {
-         xtype : 'button',
+         xtype : "button",
          text : T.GOTO_PARENT,
-         margin : '0 1 0 0',
+         margin : "0 1 0 0",
          listeners : {
             click : function(){
                this.cd2ParentDir();
