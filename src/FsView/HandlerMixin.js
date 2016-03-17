@@ -106,7 +106,7 @@ Ext.define('Cntysoft.Component.FsView.HandlerMixin', {
          var editable = fileVeItem[1];
          if(editable){
             var editorCls = fileVeItem[2];
-            var filename = record.get('fullPath') + '/' + record.get('rawName');
+            var filename = record.get('path') + '/' + record.get('rawName');
             var key = filename.replace(/[#'"&$_/\\`~]/g, '');
             var editor;
             if(this.editors.containsKey(key)){

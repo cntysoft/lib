@@ -208,19 +208,24 @@ Ext.define('Cntysoft.Component.FsView.GridView', {
             click : this.createNewFileHandler,
             scope : this
          }
-      }, {
-         text : B_TEXT.UPLOAD_FILE,
-         listeners : {
-            click : this.uploadFilesHandler,
-            scope : this
-         }
-      }, {
+      },this.getUploaderConfig(), {
          text : B_TEXT.UP_DIR,
          listeners : {
             click : this.upDirHandler,
             scope : this
          }
       }];
+   },
+   getUploaderConfig : function()
+   {
+      var B_TEXT = this.LANG_TEXT.BTN;
+      return {
+         text : B_TEXT.UPLOAD_FILE,
+         listeners : {
+            click : this.uploadFilesHandler,
+            scope : this
+         }
+      };
    },
    itemMouseEnterHandler : function(view, record, html)
    {

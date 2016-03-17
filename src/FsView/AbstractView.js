@@ -101,6 +101,12 @@ Ext.define("Cntysoft.Component.FsView.AbstractView", {
     */
    isShowPath : false,
    /**
+    * 设置文件树的数据代理，支持websocket代理
+    *
+    * @cfg {Object} fsTreeDataProxy
+    */
+   fsTreeDataProxy : null,
+   /**
     * 当前访问的路径
     *
     * @cfg {String} path
@@ -627,7 +633,16 @@ Ext.define("Cntysoft.Component.FsView.AbstractView", {
             },
             filters : [
                Ext.bind(this.fileTypeFilter, this)
-            ]
+            ],
+            listeners : {
+               load : function()
+               {
+                  if(this.hasListeners.pathchanged){
+                     this.fireEvent("pathchanged", this.path);
+                  }
+               },
+               scope : this
+            }
          });
       }
       return this.fsStore;
