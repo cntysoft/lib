@@ -31,6 +31,7 @@ Ext.define('Cntysoft.Component.FsView.FsTree', {
       this.LANG_TEXT = this.GET_LANG_TEXT('FS_TREE');
       config = config||{};
       this.applyConstraintConfig(config);
+      Ext.apply(this, config);
       Ext.apply(config, {
          store: this.createFsTreeStore(config)
       });

@@ -779,6 +779,7 @@ Ext.define("Cntysoft.Component.FsView.AbstractView", {
          region : "west",
          startPaths : this.startPaths,
          fsViewRef : this,
+         dataProxy :this.fsTreeDataProxy,
          listeners : {
             afterrender : function(tree)
             {
